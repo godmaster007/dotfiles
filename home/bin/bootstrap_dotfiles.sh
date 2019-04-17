@@ -4,17 +4,14 @@
 ################################################################################
 # Run Bootstrap
 ################################################################################
-# Step 1 (Install a data transfer app - curl is one of the best)
+# Install Curl
 # sudo apt -y install curl
 
-# OPTION 1 (One command)
-# sudo apt -y install curl && curl -sL https://git.io/fhdhf | /bin/bash
+# 1 Liner
+# curl -sL git.io/fjYMZ | /bin/bash
 
-# OPTION 2 (Shortest - download then execute)
-# curl -sL git.io/fhdhf | /bin/bash
-
-# OPTION 3 (Enables interactive questions - download to file then executes)
-# curl -sLo bootstrap.sh git.io/fhdhf && chmod +x bootstrap.sh && . bootstrap.sh
+# Download to file then run
+# curl -sLo bootstrap.sh git.io/fjYMZ && chmod +x bootstrap.sh && . bootstrap.sh
 
 # Reference original script
 # curl -sL https://gist.github.com/andsens/2913223/raw/bootstrap_homeshick.sh | tar -xzO | /bin/bash -ex
