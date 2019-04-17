@@ -7,7 +7,10 @@
 # Install Curl
 # sudo apt -y install curl
 
-# 1 Liner
+# Unshorted Link
+# https://raw.githubusercontent.com/godmaster007/dotfiles/master/home/bin/bootstrap_dotfiles.sh
+
+# 1 Liner shortened
 # curl -sL git.io/fjYMZ | /bin/bash
 
 # Download to file then run
