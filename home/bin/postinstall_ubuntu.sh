@@ -41,9 +41,9 @@ options=(1.0 "Virtualbox (Guest) - Insert ISO, restart after install)" off
 1.1 "SSH-KEY (Generate)" off
 1.2 "SSH-KEY (Paste pub key into Github)" off
 1.3 "Homeshick - Initial install" off
-1.4 "Homeshick - Clone homeshick" off
+1.4 "Homeshick - Install additional machines" off
 1.5 "Homeshick - Clone dotfiles to new machine" off
-1.6 "Homeshick - Clone dotfiles to new machine" off
+1.6 "Homeshick - Github Config" off
 1.7 "Repositories" off
 1.8 "Updates and system maintenance" off
 1.9 "NA" off
@@ -211,7 +211,7 @@ do
     3.0)
     # Essential Apps
     # Installs a list of essential linux apps
-    for line in $(cat $HOME/bin/postinstall_essential_apps.txt); do
+    for line in $(cat $HOME/bin/essential_apps.txt); do
       sudo apt -y install $line
       if [[ ! $? -eq 0 ]]; then
         echo "Problem in apt install $line" >> output.log
