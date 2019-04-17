@@ -10,11 +10,14 @@
 # Unshorted Link
 # https://raw.githubusercontent.com/godmaster007/dotfiles/master/home/bin/bootstrap_dotfiles.sh
 
+# Shortened Link
+# https://git.io/fhdhf
+
 # 1 Liner shortened
-# curl -sL git.io/fjYMZ | /bin/bash
+# curl -sL git.io/fhdhf | /bin/bash
 
 # Download to file then run
-# curl -sLo bootstrap.sh git.io/fjYMZ && chmod +x bootstrap.sh && . bootstrap.sh
+# curl -sLo bootstrap.sh git.io/fhdhf && chmod +x bootstrap.sh && . bootstrap.sh
 
 # Reference original script
 # curl -sL https://gist.github.com/andsens/2913223/raw/bootstrap_homeshick.sh | tar -xzO | /bin/bash -ex
