@@ -37,7 +37,7 @@ $INSTALL dialog
 # Not sure what this command is doing besides defining the heading
 cmd=(dialog --separate-output --checklist "Select Software to Install:" 22 76 16)
 # Option can be set as default with "on"
-options=(1.0 "Virtualbox (Guest) - Insert ISO, restart after install)" off
+options=(1.0 "Update & Clean" off
 1.1 "SSH-KEY (Generate)" off
 1.2 "SSH-KEY (Paste pub key into Github)" off
 1.3 "Homeshick - Initial install" off
@@ -45,20 +45,23 @@ options=(1.0 "Virtualbox (Guest) - Insert ISO, restart after install)" off
 1.5 "Homeshick - Clone dotfiles to new machine" off
 1.6 "Homeshick - Github Config" off
 1.7 "Repositories" off
-1.8 "Updates and system maintenance" off
+1.8 "NA" off
 1.9 "NA" off
-2.0 "Blank" off
+2.0 "NA" off
 3.0 "Essential Apps" off
 4 "Media" off
 5 "Restricted Extras" off
 6 "Teamviewer" off
-10 "Skype" off
-11 "Pidgin" off
-12 "Chrome" off
-13 "Thunderbird" off
+7 "Skype" off
+8 "NA" off
+9 "Chrome" off
+10 "Thunderbird" off
+11 "NA" off
+12 "NA" off
+13 "NA" off
 14 "Wallpapers" off
 15 "Themes (GTK)" off
-16 "NA" off
+16 "Virtualbox (Guest) - Insert ISO, restart after install" off
 17 "Virtualbox (Host)" off
 18 "Touchpad Indicator (Touch bad functionality)" off
 19 "Unetbootin (Startup disk creator)" off
@@ -93,17 +96,16 @@ do
   case $choice in
     
     1.0)
-    # Virtualbox (Guest)
-    # Insert guest additions before installing
-    #sudo apt update
-    #sudo apt -y upgrade
-    #sudo apt -y dist-upgrade
-    $INSTALL dkms build-essential
-    sudo mount -r /dev/sr0 /media
-    sudo sh /media/VBoxLinuxAdditions.run
-    sudo adduser $USER vboxsf
-    sudo reboot now
+    # Update & Clean
+    sudo apt -y update
+    sudo apt -y upgrade
+    sudo apt -y dist-upgrade
+    sudo apt -y autoclean
+    sudo apt -y autoremove
+    sudo apt -y clean
+    sudo updatedb
     ;;
+    
     
     1.1)
     # SSH-KEY (Generate)
@@ -177,7 +179,7 @@ do
     git remote set-url origin git@github.com:godmaster007/dotfiles.git
     cd ~
     # Link all files to $HOME
-    $HOME/.homesick/repos/homeshick/bin/homeshick link --force
+    #$HOME/.homesick/repos/homeshick/bin/homeshick link --force
     ;;
     
     1.7)
@@ -187,14 +189,7 @@ do
     ;;
     
     1.8)
-    # Updates & system maintenance
-    sudo apt -y update
-    sudo apt -y upgrade
-    sudo apt -y dist-upgrade
-    sudo apt -y autoclean
-    sudo apt -y autoremove
-    sudo apt -y clean
-    sudo updatedb
+    # NA
     ;;
     
     1.9)
@@ -204,7 +199,7 @@ do
     
     
     2.0)
-    # Blank
+    # NA
     ;;
     
     
@@ -284,6 +279,21 @@ do
     $INSTALL thunderbird
     ;;
     
+
+    11)
+    # NA
+    ;;
+
+
+    12)
+    # NA
+    ;;
+
+
+    13)
+    # NA
+    ;;
+
     
     14)
     # Wallpapers
@@ -318,7 +328,16 @@ do
     
     
     16)
-    #na
+    # Virtualbox (Guest)
+    # Insert guest additions before installing
+    #sudo apt update
+    #sudo apt -y upgrade
+    #sudo apt -y dist-upgrade
+    $INSTALL dkms build-essential
+    sudo mount -r /dev/sr0 /media
+    sudo sh /media/VBoxLinuxAdditions.run
+    sudo adduser $USER vboxsf
+    sudo reboot now
     ;;
     
     
