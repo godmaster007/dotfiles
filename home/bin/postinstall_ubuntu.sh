@@ -137,7 +137,9 @@ do
       source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
     fi' >> $HOME/.bashrc
     # Enable Auto Refresh
-    printf '\n# Auto Refresh\nhomeshick refresh -q\n' >> $HOME/.bashrc
+    printf '\n# Auto Refresh
+    homeshick refresh -q
+    \n' >> $HOME/.bashrc
     # Source .bashrc
     source $HOME/.bashrc
     ;;
