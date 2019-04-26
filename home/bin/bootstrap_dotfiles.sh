@@ -85,6 +85,23 @@ $aptget install -y vim nano git xclip
 
 
 ################################################################################
+# SSH-Key Config + Add pub key to github
+################################################################################
+# Generate new keys, use passphrase or bypass, remove <yes "" |> to set phrase
+yes "" | ssh-keygen -t rsa -b 4096
+# Start SSH-Agent in the background
+eval $(ssh-agent -s)
+# Add private SSH-Key to SSH-Agent "-k" stores passphrase to keychain
+# Example with -k: "ssh-add -k ~/.ssh/id_rsa"
+ssh-add ~/.ssh/id_rsa
+# Add public key to Github, copies to clipboard, then manually paste in browser
+xclip -sel clip < ~/.ssh/id_rsa.pub
+# Opens github ssh registration in browser
+#firefox "https://github.com/settings/ssh/new"
+xdg-open "https://github.com/settings/ssh/new"
+
+
+################################################################################
 # Install homeshick (Adding another machine)
 ################################################################################
 if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
@@ -108,23 +125,6 @@ git remote set-url origin git@github.com:"$git_user"/"$git_repo"
 cd ~
 # Link all files to $HOME
 homeshick link --force
-
-
-################################################################################
-# SSH-Key Config + Add pub key to github
-################################################################################
-# Generate new keys, use passphrase or bypass, remove <yes "" |> to set phrase
-yes "" | ssh-keygen -t rsa -b 4096
-# Start SSH-Agent in the background
-eval $(ssh-agent -s)
-# Add private SSH-Key to SSH-Agent "-k" stores passphrase to keychain
-# Example with -k: "ssh-add -k ~/.ssh/id_rsa"
-ssh-add ~/.ssh/id_rsa
-# Add public key to Github, copies to clipboard, then manually paste in browser
-xclip -sel clip < ~/.ssh/id_rsa.pub
-# Opens github ssh registration in browser
-#firefox "https://github.com/settings/ssh/new"
-xdg-open "https://github.com/settings/ssh/new"
 
 
 ##########################
