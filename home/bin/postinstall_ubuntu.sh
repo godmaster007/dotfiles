@@ -106,48 +106,40 @@ do
     sudo updatedb
     ;;
     
-    
     1.1)
-    # SSH-KEY (Generate)
-    # Generate new ssh-keys
-    # Use default settings, passphrase (optional) or bypass with the (yes "" |)
+    # SSH-KEYS (Generate)
+    # Generates new ssh-keys with default settings then adds to ssh-agent
+    # Passphrase is optional, the (yes "" |) bypasses it
     yes "" | ssh-keygen -t rsa -b 4096
-    # Start the ssh-agent in the background
+    # Start ssh-agent, add private key, (-k) flag stores passphrase in keychain
     eval $(ssh-agent -s)
-    # Add private key to ssh-agent, "-k" stores the passphrase to the keychain
-    # Example - ssh-add -k ~/.ssh/id_rsa
+    # Add private key to ssh-agent (-k) flag stores passphrase in keychain
+    # Example (ssh-add -k ~/.ssh/id_rsa)
     ssh-add ~/.ssh/id_rsa
     ;;
     
     1.2)
-    # SSH-KEY (Paste pub key to Github)
-    # Copies public ssh key to clipboard, opens browser to Github SSH
-    # Install xclip
+    # SSH-KEYS (Paste to Github)
+    # Uses xclip to copy public key to clipboard then opens link to github
     $INSTALL xclip
-    # Copy contents of id_rsa.pub to clipboard
     xclip -sel clip < ~/.ssh/id_rsa.pub
-    # Open browser to github new sshkey, paste, save, close
     xdg-open https://github.com/settings/ssh/new
-    source ~/.bashrc
     ;;
     
     1.3)
     # Homeshick - Initial Install
     # Clone homeshick
     git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
-    # Add homeshick to .bashrc for sh and derivatives (bash, dash, ksh, zsh etc.)
-    # Enable homeshick completion
+    # Add homeshick to .bashrc, enable auto completion and auto refresh
     printf '\n# Source
     if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
-        source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-        source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+      source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+      source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
     fi' >> $HOME/.bashrc
     # Enable Auto Refresh
     printf '\n# Auto Refresh\nhomeshick refresh -q' >> $HOME/.bashrc
     # Source .bashrc
     source $HOME/.bashrc
-    # Enable Bash Completion in .bashrc
-    #printf '\nsource "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"' >> $HOME/.bashrc
     ;;
     
     1.4)
@@ -281,21 +273,21 @@ do
     $INSTALL thunderbird
     ;;
     
-
+    
     11)
     # NA
     ;;
-
-
+    
+    
     12)
     # NA
     ;;
-
-
+    
+    
     13)
     # NA
     ;;
-
+    
     
     14)
     # Wallpapers
@@ -597,4 +589,3 @@ do
     
   esac
 done
-
