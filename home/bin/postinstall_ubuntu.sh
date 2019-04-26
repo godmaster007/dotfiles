@@ -53,7 +53,7 @@ options=(1.0 "Update & Clean" off
 5 "Restricted Extras" off
 6 "Teamviewer" off
 7 "Skype" off
-8 "NA" off
+8 "Docky (Desktop app launcher)" off
 9 "Chrome" off
 10 "Thunderbird" off
 11 "NA" off
@@ -260,7 +260,9 @@ do
     
     
     8)
-    # NA
+    # Docky
+    # Desktop app launcher
+    sudo apt -y install docky
     ;;
     
     
