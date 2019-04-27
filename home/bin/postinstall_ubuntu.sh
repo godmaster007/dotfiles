@@ -10,6 +10,44 @@ set -v
 
 
 ################################################################################
+# Set Github custom variables
+################################################################################
+# Github and SSH config
+echo "Hello, "$USER".  This script will configure your Github and SSH config."
+
+# Username
+echo -n "Enter your Github Username (ex: gituser1234) and press [ENTER]: "
+read git_user
+
+# Email
+echo -n "Enter your Github Email (ex: default@gmail.com) and press [ENTER]: "
+read git_email
+
+# Repo
+echo -n "Enter your Github Repo (dotfiles.git) and press [ENTER]: "
+read git_repo
+
+# These if's test if the variable is is null (has length 0)
+# This way if no input is entered it will auto setup my default config
+if [ -z $git_user ]; then
+  git_user='godmaster007'
+fi
+
+if [ -z $git_email ]; then
+  git_email='default+default@gmail.com'
+fi
+
+if [ -z $git_repo ]; then
+  git_repo='dotfiles'
+fi
+
+echo Your github username is: $git_user
+echo Your github email is: $git_email
+echo Your github reponame is: $git_repo
+echo Will set the remote url origin of your repo to: git@github.com:$git_user/$(git_repo).git
+
+
+################################################################################
 # Define Variables
 ################################################################################
 # Shows which flavor of ubuntu is installed
@@ -119,6 +157,7 @@ do
     ssh-add ~/.ssh/id_rsa
     ;;
     
+    
     1.2)
     # SSH-KEYS (Paste to Github)
     # Uses xclip to copy public key to clipboard then opens link to github
@@ -127,23 +166,43 @@ do
     xdg-open https://github.com/settings/ssh/new
     ;;
     
+    
     1.3)
     # Homeshick - Initial Install
     # Clone homeshick
     git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
+    
     # Add homeshick to .bashrc, enable auto completion and auto refresh
     printf '\n# Source
     if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
       source "$HOME/.homesick/repos/homeshick/homeshick.sh"
       source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
     fi' >> $HOME/.bashrc
+    
     # Enable Auto Refresh
     printf '\n# Auto Refresh
     homeshick refresh -q
     \n' >> $HOME/.bashrc
+    
+    # Quick homeshick install
+    if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
+      git clone https://www.github.com/godmaster007/dotfiles $HOME/.homesick/repos/homeshick godmaster007/dotfiles
+      source $HOME/.homesick/repos/homeshick/homeshick.sh
+    fi
+    
+    # Quick homeshick install
+    if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
+      git clone https://www.github.com/git_user/dotfiles $HOME/.homesick/repos/homeshick godmaster007/dotfiles
+      source $HOME/.homesick/repos/homeshick/homeshick.sh
+    fi
+    
+    
+    
+    
     # Source .bashrc
     source $HOME/.bashrc
     ;;
+    
     
     1.4)
     # Homeshick - Install additional machines
@@ -153,6 +212,7 @@ do
       source $HOME/.homesick/repos/homeshick/homeshick.sh
     fi
     ;;
+    
     
     1.5)
     # Homeshick - Clone dotfiles to new machine
@@ -164,6 +224,7 @@ do
     source $HOME/.bashrc
     source $HOME/.homesick/repos/homeshick/homeshick.sh
     ;;
+    
     
     1.6)
     # Homeshick - Github Config
@@ -187,15 +248,15 @@ do
     # Disable Error Reporting (Remove Apport)
     if grep "enabled=0" /etc/default/apport
     then
-        echo "Apport Error reporting already disabled"
+      echo "Apport Error reporting already disabled"
     else
-        sudo sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
-        echo "Apport error reporting DISABLED!"
+      sudo sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
+      echo "Apport error reporting DISABLED!"
     fi
     sudo apt -y remove --purge apport
     ;;
     
-
+    
     1.9)
     # Uses mlocate to find files
     # Example "locate thunderbird"
@@ -497,13 +558,13 @@ do
     sudo /etc/init.d/clamav-daemon start
     ;;
     
-
+    
     28.1)
     # ClamAV (Uninstall)
     sudo apt-get -y remove --purge clamav*
     ;;
-
-
+    
+    
     29)
     # Youtube-dl
     # Web downloader
