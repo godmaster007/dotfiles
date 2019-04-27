@@ -75,6 +75,7 @@ options=(1.0 "Update & Clean" off
 26 "Atom (Text Editor)" off
 27 "Wireshark (Network Monitor)" off
 28 "ClamAV (Virus Protection)" off
+28.1 "ClamAV (Uninstall)" off
 29 "Youtube-dl (Web downloader)" off
 30 "Most (Manpage Highlighting)" off
 31 "Ubuntu 18.04 (Custom Tweaks)" off
@@ -479,7 +480,7 @@ do
     ;;
     
     28)
-    # ClamAV
+    # ClamAV (Install)
     # Virus Protection
     # Troubleshooting, first stop deamon then rerun update
     # sudo systemctl stop clamav-freshclam.service
@@ -496,6 +497,13 @@ do
     sudo /etc/init.d/clamav-daemon start
     ;;
     
+
+    28.1)
+    # ClamAV (Uninstall)
+    sudo apt-get remove --purge clamav*
+    ;;
+
+
     29)
     # Youtube-dl
     # Web downloader
