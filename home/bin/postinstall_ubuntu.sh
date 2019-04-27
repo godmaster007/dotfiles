@@ -500,7 +500,7 @@ do
 
     28.1)
     # ClamAV (Uninstall)
-    sudo apt-get remove --purge clamav*
+    sudo apt-get -y remove --purge clamav*
     ;;
 
 
