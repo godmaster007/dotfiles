@@ -45,7 +45,7 @@ options=(1.0 "Update & Clean" off
 1.5 "Homeshick - Clone dotfiles to new machine" off
 1.6 "Homeshick - Github Config" off
 1.7 "Repositories" off
-1.8 "NA" off
+1.8 "Disable Error Reporting" off
 1.9 "NA" off
 2.0 "NA" off
 3.0 "Essential Apps" off
@@ -183,9 +183,18 @@ do
     ;;
     
     1.8)
-    # NA
+    # Disable Error Reporting
+    if grep "enabled=0" /etc/default/apport
+    then
+        echo "Apport Error reporting already disabled"
+    else
+        sudo sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
+        echo "Apport error reporting DISABLED!"
+    fi
+    sudo apt -y remove --purge apport
     ;;
     
+
     1.9)
     # Uses mlocate to find files
     # Example "locate thunderbird"
