@@ -159,11 +159,11 @@ else
 	printf '\n# Source Homeshick
 	if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
 	source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-	# Auto Completion
+	\n# Auto Completion
 	source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
-	# Auto Refresh
+	\n# Auto Refresh
 	homeshick refresh -q
-	\nfi' >> $HOME/.bashrc
+	fi\n' >> $HOME/.bashrc
 fi
 
 source $HOME/.bashrc
