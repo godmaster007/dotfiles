@@ -119,16 +119,26 @@ read git_repo
 # These if's test if the variable is is null (has length 0)
 # This way if no input is entered it will auto setup my default config
 if [ -z $git_user ]; then
-  git_user='godmaster007'
+	git_user='godmaster007'
+elif [ -z $git_email ]; then
+	git_email='default+default@gmail.com'
+elif [ -z $git_repo ]; then
+	git_repo='dotfiles'
+else
+	echo "Custom settings aquired"
 fi
 
-if [ -z $git_email ]; then
-  git_email='default+default@gmail.com'
-fi
-
-if [ -z $git_repo ]; then
-  git_repo='dotfiles'
-fi
+# if [ -z $git_user ]; then
+#   git_user='godmaster007'
+# fi
+#
+# if [ -z $git_email ]; then
+#   git_email='default+default@gmail.com'
+# fi
+#
+# if [ -z $git_repo ]; then
+#   git_repo='dotfiles'
+# fi
 
 echo Your github username is: $git_user
 echo Your github email is: $git_email
@@ -142,8 +152,8 @@ git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshi
 # Add homeshick to .bashrc, enable auto completion and auto refresh
 printf '\n# Source
 if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
-  source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-  source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+	source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+	source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 fi' >> $HOME/.bashrc
 
 # Enable Auto Refresh
