@@ -157,13 +157,12 @@ if grep 'source "$HOME/.homesick/repos/homeshick/homeshick.sh"' ~/.bashrc; then
 else
 	printf '\n# Source Homeshick
 	if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
-		source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-		# Auto Completion
-		source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
-		# Auto Refresh
-		homeshick refresh -q
-		\n
-	fi' >> $HOME/.bashrc
+	source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+	# Auto Completion
+	source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+	# Auto Refresh
+	homeshick refresh -q
+	\nfi' >> $HOME/.bashrc
 fi
 
 source $HOME/.bashrc
