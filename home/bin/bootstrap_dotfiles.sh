@@ -90,10 +90,17 @@ $aptget install -y vim nano git xclip
 ################################################################################
 # SSH-Key Config + Add pub key to github
 ################################################################################
+
 # Generate new keys, use passphrase or bypass, remove <yes "" |> to set phrase
-yes "" | ssh-keygen -t rsa -b 4096
+if [ -f ~/.ssh/id_rsa.pub ];	then
+	echo "Public SSHkey already created"
+else
+	yes "" | ssh-keygen -t rsa -b 4096
+fi
+
 # Start SSH-Agent in the background
 eval $(ssh-agent -s)
+
 # Add private SSH-Key to SSH-Agent "-k" stores passphrase to keychain
 # Example with -k: "ssh-add -k ~/.ssh/id_rsa"
 ssh-add ~/.ssh/id_rsa
@@ -105,7 +112,8 @@ ssh-add ~/.ssh/id_rsa
 ################################################################################
 
 # Github and SSH config
-echo "Hello, "$USER".  This script will configure your Github and SSH config."
+echo "Hello, "$USER".  This script will configure your Github and SSH config. \n
+Leave the responses blank if you would like to use default settings."
 
 # Username
 echo -n "Enter your Github Username (ex: gituser1234) and press [ENTER]: "
@@ -131,47 +139,34 @@ else
 	echo "Custom settings aquired"
 fi
 
-# if [ -z $git_user ]; then
-#   git_user='godmaster007'
-# fi
-#
-# if [ -z $git_email ]; then
-#   git_email='default+default@gmail.com'
-# fi
-#
-# if [ -z $git_repo ]; then
-#   git_repo='dotfiles'
-# fi
-
 echo Your github username is: $git_user
 echo Your github email is: $git_email
 echo Your github reponame is: $git_repo
+# Set SSH remote origin
 #echo Will set the remote url origin of your repo to: git@github.com:$git_user/"$git_repo".git
-echo Will set the remote url origin of your repo to: https://www.github.com/"$git_user"/"$git_repo".git
+
+# Set HTTPS remote origin
+echo Will set the repos remote url origin to: https://www.github.com/"$git_user"/"$git_repo".git
 
 # Clone homeshick
 git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
 
 # Add homeshick to .bashrc, enable auto completion and auto refresh
-printf '\n# Source
-if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
-	source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-	source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
-fi' >> $HOME/.bashrc
-
-# Enable Auto Refresh
-printf '\n# Auto Refresh
-homeshick refresh -q
-\n' >> $HOME/.bashrc
-
-# # Clone private dotfiles repo
-# if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
-#   git clone https://www.github.com/"$git_user"/"$git_repo" $HOME/.homesick/repos/homeshick "$git_user"/"$git_repo"
-#   source $HOME/.homesick/repos/homeshick/homeshick.sh
-# fi
+if grep 'source "$HOME/.homesick/repos/homeshick/homeshick.sh"' ~/.bashrc; then
+	echo "Homeshick already added to .bashrc"
+else
+	printf '\n# Source Homeshick
+	if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
+		source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+		# Auto Completion
+		source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+		# Auto Refresh
+		homeshick refresh -q
+		\n
+	fi' >> $HOME/.bashrc
+fi
 
 source $HOME/.bashrc
-
 
 # Homeshick (HTTPS batch clone dotfiles to new machine)
 # "--batch" bypasses user input questions like yes/no
@@ -182,12 +177,30 @@ source $HOME/.bashrc
 source $HOME/.homesick/repos/homeshick/homeshick.sh
 homeshick link --force
 
-# homeshick cd dotfiles
+# Configure git
 cd $HOME/.homesick/repos/dotfiles
 git config --global user.email "$git_email"
 git config --global user.name "$git_user"
 git remote set-url origin git@github.com:"$git_user"/"$git_repo".git
 cd ~
+
+
+# # Enable Auto Refresh
+# printf '\n# Auto Refresh
+# homeshick refresh -q
+# \n' >> $HOME/.bashrc
+
+# # Clone private dotfiles repo
+# if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
+#   git clone https://www.github.com/"$git_user"/"$git_repo" $HOME/.homesick/repos/homeshick "$git_user"/"$git_repo"
+#   source $HOME/.homesick/repos/homeshick/homeshick.sh
+# fi
+
+#source $HOME/.bashrc
+
+
+
+
 
 
 # ################################################################################
@@ -235,13 +248,13 @@ xdg-open "https://github.com/settings/ssh/new"
 # Set default shell to your favorite shell
 ################################################
 #$chsh --shell /bin/zsh `whoami`
-echo "Log in again to start your proper shell"
+#echo "Log in again to start your proper shell"
 
 
 ##########################################
 # Show git config status remind user to reboot for settings to take affect
 ##########################################
-cd $HOME/.homesick/repos/dotfiles
-git config -l
-cd ~
-echo "sudo reboot -h now"
+# cd $HOME/.homesick/repos/dotfiles
+# git config -l
+# cd ~
+# echo "sudo reboot -h now"
