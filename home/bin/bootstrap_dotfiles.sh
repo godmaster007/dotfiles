@@ -151,18 +151,13 @@ printf '\n# Auto Refresh
 homeshick refresh -q
 \n' >> $HOME/.bashrc
 
-# Clone private dotfiles repo
-if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
-  git clone https://www.github.com/"$git_user"/"$git_repo" $HOME/.homesick/repos/homeshick "$git_user"/"$git_repo"
-  source $HOME/.homesick/repos/homeshick/homeshick.sh
-fi
+# # Clone private dotfiles repo
+# if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
+#   git clone https://www.github.com/"$git_user"/"$git_repo" $HOME/.homesick/repos/homeshick "$git_user"/"$git_repo"
+#   source $HOME/.homesick/repos/homeshick/homeshick.sh
+# fi
 
-# homeshick cd dotfiles
-cd $HOME/.homesick/repos/dotfiles
-git config --global user.email "$git_email"
-git config --global user.name "$git_user"
-git remote set-url origin git@github.com:"$git_user"/"$git_repo".git
-cd ~
+
 
 
 # Homeshick (HTTPS batch clone dotfiles to new machine)
@@ -173,6 +168,13 @@ homeshick --batch clone https://github.com/"$git_user"/"$git_repo".git
 source $HOME/.bashrc
 source $HOME/.homesick/repos/homeshick/homeshick.sh
 homeshick link --force
+
+# homeshick cd dotfiles
+cd $HOME/.homesick/repos/dotfiles
+git config --global user.email "$git_email"
+git config --global user.name "$git_user"
+git remote set-url origin git@github.com:"$git_user"/"$git_repo".git
+cd ~
 
 
 # ################################################################################
