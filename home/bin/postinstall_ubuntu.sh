@@ -128,46 +128,44 @@ do
     # Homeshick - Initial Install
     # Github and SSH config
     echo "Hello, "$USER".  This script will configure your Github and SSH config."
-
+    
     # Username
     echo -n "Enter your Github Username (ex: gituser1234) and press [ENTER]: "
     read git_user
-
+    
     # Email
     echo -n "Enter your Github Email (ex: default@gmail.com) and press [ENTER]: "
     read git_email
-
+    
     # Repo
     echo -n "Enter your Github Repo (ex: dotfiles) and press [ENTER]: "
     read git_repo
-
+    
     # These if's test if the variable is is null (has length 0)
     # This way if no input is entered it will auto setup my default config
     if [ -z $git_user ]; then
       git_user='godmaster007'
-    fi
-
-    if [ -z $git_email ]; then
+    elif [ -z $git_email ]; then
       git_email='default+default@gmail.com'
-    fi
-
-    if [ -z $git_repo ]; then
+    elif [ -z $git_repo ]; then
       git_repo='dotfiles'
+    else
+      echo "Custom settings aquired"
     fi
-
+    
     echo Your github username is: $git_user
     echo Your github email is: $git_email
     echo Your github reponame is: $git_repo
     #echo Will set the remote url origin of your repo to: git@github.com:$git_user/"$git_repo".git
     echo Will set the remote url origin of your repo to: https://www.github.com/"$git_user"/"$git_repo".git
-
+    
     # homeshick cd dotfiles
     cd $HOME/.homesick/repos/dotfiles
     git config --global user.email "$git_email"
     git config --global user.name "$git_user"
     git remote set-url origin git@github.com:"$git_user"/"$git_repo".git
     cd ~
-
+    
     # Clone homeshick
     git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
     
@@ -209,7 +207,7 @@ do
     source $HOME/.homesick/repos/homeshick/homeshick.sh
     ;;
     
-
+    
     1.7)
     # Repositories
     # Add Canonical_Partners
