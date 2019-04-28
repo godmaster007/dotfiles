@@ -232,6 +232,11 @@ cd ~
 xclip -sel clip < ~/.ssh/id_rsa.pub
 # Opens github ssh registration in browser
 #firefox "https://github.com/settings/ssh/new"
+echo "DON'T FORGET TO PASTE YOUR SSHKEY INTO GITHUB"
+
+echo "Would you like to open the links for github sshkey?"
+
+
 xdg-open "https://github.com/settings/ssh/new"
 
 
