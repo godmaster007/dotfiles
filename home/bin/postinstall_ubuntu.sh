@@ -4,9 +4,9 @@
 ################################################################################
 # Run in Debug mode
 ################################################################################
-set -x
+#set -x
 #set -e
-set -v
+#set -v
 
 
 
@@ -159,13 +159,6 @@ do
     #echo Will set the remote url origin of your repo to: git@github.com:$git_user/"$git_repo".git
     echo Will set the remote url origin of your repo to: https://www.github.com/"$git_user"/"$git_repo".git
     
-    # homeshick cd dotfiles
-    cd $HOME/.homesick/repos/dotfiles
-    git config --global user.email "$git_email"
-    git config --global user.name "$git_user"
-    git remote set-url origin git@github.com:"$git_user"/"$git_repo".git
-    cd ~
-    
     # Clone homeshick
     git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
     
@@ -194,6 +187,13 @@ do
     # May need to switch back to SSH git@github.com:godmaster007/dotfiles.git
     source $HOME/.bashrc
     source $HOME/.homesick/repos/homeshick/homeshick.sh
+    
+    # homeshick cd dotfiles
+    cd $HOME/.homesick/repos/dotfiles
+    git config --global user.email "$git_email"
+    git config --global user.name "$git_user"
+    git remote set-url origin git@github.com:"$git_user"/"$git_repo".git
+    cd ~
     ;;
     
     
