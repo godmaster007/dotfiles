@@ -236,8 +236,8 @@ echo "DON'T FORGET TO PASTE YOUR SSHKEY INTO GITHUB"
 
 echo "Would you like to open the links for github sshkey?"
 
-
-xdg-open "https://github.com/settings/ssh/new"
+# Opens default browser to github sshkeys then closes terminal
+xdg-open "https://github.com/settings/ssh/new" </dev/null >/dev/null 2>&1 & disown
 
 
 
