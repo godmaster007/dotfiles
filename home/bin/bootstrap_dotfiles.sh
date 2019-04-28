@@ -94,11 +94,7 @@ eval $(ssh-agent -s)
 # Add private SSH-Key to SSH-Agent "-k" stores passphrase to keychain
 # Example with -k: "ssh-add -k ~/.ssh/id_rsa"
 ssh-add ~/.ssh/id_rsa
-# Add public key to Github, copies to clipboard, then manually paste in browser
-xclip -sel clip < ~/.ssh/id_rsa.pub
-# Opens github ssh registration in browser
-#firefox "https://github.com/settings/ssh/new"
-xdg-open "https://github.com/settings/ssh/new"
+
 
 
 ################################################################################
@@ -203,6 +199,15 @@ homeshick link --force
 # cd ~
 # # Link all files to $HOME
 # homeshick link --force
+
+
+# Add public key to Github, copies to clipboard, then manually paste in browser
+xclip -sel clip < ~/.ssh/id_rsa.pub
+# Opens github ssh registration in browser
+#firefox "https://github.com/settings/ssh/new"
+xdg-open "https://github.com/settings/ssh/new"
+
+
 
 
 ##########################
