@@ -157,7 +157,7 @@ homeshick refresh -q
 #   source $HOME/.homesick/repos/homeshick/homeshick.sh
 # fi
 
-
+source $HOME/.bashrc
 
 
 # Homeshick (HTTPS batch clone dotfiles to new machine)
