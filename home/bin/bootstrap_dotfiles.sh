@@ -147,7 +147,7 @@ echo Your github reponame is: $git_repo
 #echo Will set the remote url origin of your repo to: git@github.com:$git_user/"$git_repo".git
 
 # Set HTTPS remote origin
-echo Will set the repos remote url origin to: https://www.github.com/"$git_user"/"$git_repo".git
+echo 'Will set the repos remote url origin to: https://www.github.com/"$git_user"/"$git_repo".git'
 
 # Clone homeshick
 git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
@@ -168,21 +168,24 @@ fi
 
 source $HOME/.bashrc
 
-# Homeshick (HTTPS batch clone dotfiles to new machine)
-# "--batch" bypasses user input questions like yes/no
-# Cloning from the HTTPS link doesn't require SSH keys to be configured
-homeshick --batch clone https://github.com/"$git_user"/"$git_repo".git
-# May need to switch back to SSH git@github.com:godmaster007/dotfiles.git
-source $HOME/.bashrc
-source $HOME/.homesick/repos/homeshick/homeshick.sh
-homeshick link --force
-
 # Configure git
 cd $HOME/.homesick/repos/dotfiles
 git config --global user.email "$git_email"
 git config --global user.name "$git_user"
 git remote set-url origin git@github.com:"$git_user"/"$git_repo".git
 cd ~
+homeshick link --force
+
+
+# # Homeshick (HTTPS batch clone dotfiles to new machine)
+# # "--batch" bypasses user input questions like yes/no
+# # Cloning from the HTTPS link doesn't require SSH keys to be configured
+# homeshick --batch clone https://github.com/"$git_user"/"$git_repo".git
+# # May need to switch back to SSH git@github.com:godmaster007/dotfiles.git
+# source $HOME/.bashrc
+# source $HOME/.homesick/repos/homeshick/homeshick.sh
+# homeshick link --force
+
 
 
 # # Enable Auto Refresh
