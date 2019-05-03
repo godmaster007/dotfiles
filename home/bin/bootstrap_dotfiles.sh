@@ -158,22 +158,30 @@ if grep 'source "$HOME/.homesick/repos/homeshick/homeshick.sh"' ~/.bashrc; then
 else
 	printf '\n# Source Homeshick
 	if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
-	source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-	\n# Auto Completion
-	source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
-	\n# Auto Refresh
-	homeshick refresh -q
-	fi\n' >> $HOME/.bashrc
+		source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+		\n# Auto Completion
+		source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+		\n# Auto Refresh
+		homeshick refresh -q
+	fi
+	\n' >> $HOME/.bashrc
 fi
 
 source $HOME/.bashrc
 
+
 # Configure git
+# # Homeshick (HTTPS batch clone dotfiles to new machine)
+# # "--batch" bypasses user input questions like yes/no
+# # Cloning from the HTTPS link doesn't require SSH keys to be configured
+homeshick --batch clone https://github.com/"$git_user"/"$git_repo".git
 cd $HOME/.homesick/repos/dotfiles
 git config --global user.email "$git_email"
 git config --global user.name "$git_user"
 git remote set-url origin git@github.com:"$git_user"/"$git_repo".git
 cd ~
+source $HOME/.bashrc
+source $HOME/.homesick/repos/homeshick/homeshick.sh
 homeshick link --force
 
 
