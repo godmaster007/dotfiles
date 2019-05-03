@@ -174,7 +174,7 @@ source $HOME/.bashrc
 # # Homeshick (HTTPS batch clone dotfiles to new machine)
 # # "--batch" bypasses user input questions like yes/no
 # # Cloning from the HTTPS link doesn't require SSH keys to be configured
-homeshick --batch clone "https://github.com/$git_user/${git_repo}.git"
+homeshick --batch clone "https://github.com/$git_user/$git_repo'.git'"
 cd $HOME/.homesick/repos/dotfiles
 git config --global user.email "$git_email"
 git config --global user.name "$git_user"
