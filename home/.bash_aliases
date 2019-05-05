@@ -176,6 +176,7 @@ YDM () {
   "$1"
 }
 
+# Download playlist as MP3 files into shared directory
 YDM! () {
   cd /media/sf_Downloads/Youtube_DL/mp3
   youtube-dl \
@@ -199,11 +200,10 @@ YDW () {
   --add-metadata -ciwx \
   --audio-format wav -o '%(title)s.%(ext)s' \
   --metadata-from-title '%(artist)s - %(title)s' \
-  --embed-thumbnail \
   "$1"
 }
 
-# Download playlist as WAV files
+# Download playlist as WAV files into shared directory
 YDW! () {
   cd /media/sf_Downloads/Youtube_DL/wav
   youtube-dl \
@@ -213,7 +213,6 @@ YDW! () {
   --add-metadata -ciwx \
   --audio-format wav -o '%(title)s.%(ext)s' \
   --metadata-from-title '%(artist)s - %(title)s' \
-  --embed-thumbnail \
   "$1"
   cd ~
 }
