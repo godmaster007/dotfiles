@@ -176,7 +176,7 @@ YDM () {
   "$1"
 }
 
-TDM! () {
+TDMM () {
   cd /media/sf_Downloads/Youtube_DL/mp3
   youtube-dl \
   --download-archive downloaded.txt \
@@ -204,7 +204,7 @@ TDW () {
 }
 
 # Download playlist as WAV files
-YDW! () {
+YDWW () {
   cd /media/sf_Downloads/Youtube_DL/wav
   youtube-dl \
   --download-archive downloaded.txt \
