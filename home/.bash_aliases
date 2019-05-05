@@ -189,6 +189,22 @@ YTDLW () {
   "$1"
 }
 
+# Download playlist as WAV files
+YTDLW1 () {
+  cd /media/sf_Downloads/Youtube_DL/wav
+  youtube-dl \
+  --download-archive downloaded.txt \
+  --no-post-overwrites \
+  --audio-quality 320K \
+  --add-metadata -ciwx \
+  --audio-format wav -o '%(title)s.%(ext)s' \
+  --metadata-from-title '%(artist)s - %(title)s' \
+  --embed-thumbnail \
+  "$1"
+  cd ~
+}
+
+
 ################################################################################
 # Dropbox-Uploader
 ################################################################################
@@ -412,4 +428,3 @@ alias yumIN='yum list installed'
 ##############
 ## Archived ##
 ##############
-
