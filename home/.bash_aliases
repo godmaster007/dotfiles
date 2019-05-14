@@ -33,14 +33,14 @@ EA! () {
 # Argument 1 = nano, vim, vi, etc (shell editors)
 # Example = EP! nano
 EP! () {
-  "$1" ~/bin/postinstall_ubuntu_v2.sh
+  "$1" ~/bin/postinstall_ubuntu.sh
   echo "postinstall_ubuntu.sh - Saved!!"
   homeshick cd dotfiles
   git add .
   git commit -am "postinstall_ubuntu.sh UPDATED"
   git push
   cd ~
-  echo "DOTFILES PUSHED!!!!"
+  echo "### Postinstall_ubuntu.sh UPDATED AND PUSHED! ###"
   homeshick check
 }
 
