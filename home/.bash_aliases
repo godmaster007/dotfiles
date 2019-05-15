@@ -7,42 +7,42 @@
 # test thsi fuckiang push
 
 
-################################################################################
-# Homeshick - Basic Git Functionality
-################################################################################
+# ################################################################################
+# # Homeshick - Basic Git Functionality
+# ################################################################################
 
-# Edit Bash Aliases
-# Automatically sources .bashrc, commits and pushs to github
-# Argument 1 = nano, vim (shell editors) need to add non shell app functionality
-# Example = EA! vim
-EA! () {
-  "$1" ~/.bash_aliases
-  source ~/.bashrc
-  echo ".bash_aliases - Saved & Sourced!!"
-  homeshick cd dotfiles
-  git add .
-  git commit -am ".bash_aliases updated"
-  git push
-  cd ~
-  echo "Dotfiles PUSHED!!!!"
-  homeshick check
-}
+# # Edit Bash Aliases
+# # Automatically sources .bashrc, commits and pushs to github
+# # Argument 1 = nano, vim (shell editors) need to add non shell app functionality
+# # Example = EA! vim
+# EA! () {
+#   "$1" ~/.bash_aliases
+#   source ~/.bashrc
+#   echo ".bash_aliases - Saved & Sourced!!"
+#   homeshick cd dotfiles
+#   git add .
+#   git commit -am ".bash_aliases updated"
+#   git push
+#   cd ~
+#   echo "Dotfiles PUSHED!!!!"
+#   homeshick check
+# }
 
-# Edit postinstall script
-# Automatically pushes changes to github on exit
-# Argument 1 = nano, vim, vi, etc (shell editors)
-# Example = EP! nano
-EP! () {
-  "$1" ~/bin/postinstall_ubuntu.sh
-  echo "postinstall_ubuntu.sh - Saved!!"
-  homeshick cd dotfiles
-  git add .
-  git commit -am "postinstall_ubuntu.sh UPDATED"
-  git push
-  cd ~
-  echo "### Postinstall_ubuntu.sh UPDATED AND PUSHED! ###"
-  homeshick check
-}
+# # Edit postinstall script
+# # Automatically pushes changes to github on exit
+# # Argument 1 = nano, vim, vi, etc (shell editors)
+# # Example = EP! nano
+# EP! () {
+#   "$1" ~/bin/postinstall_ubuntu.sh
+#   echo "postinstall_ubuntu.sh - Saved!!"
+#   homeshick cd dotfiles
+#   git add .
+#   git commit -am "postinstall_ubuntu.sh UPDATED"
+#   git push
+#   cd ~
+#   echo "### Postinstall_ubuntu.sh UPDATED AND PUSHED! ###"
+#   homeshick check
+# }
 
 # Push local changes
 # Updates dotfiles repo with local changes
@@ -180,14 +180,14 @@ YDL_M () {
 YDL_MS () {
   cd /mnt/c/Users/nicho/Downloads/YoutubeDL/mp3
   youtube-dl \
-  --download-archive downloaded.txt \
+  '--download-archive downloaded.txt \
   --no-post-overwrites \
   --audio-quality 320K \
   --add-metadata -ciwx \
   --audio-format mp3 -o '%(title)s.%(ext)s' \
   --metadata-from-title '%(artist)s - %(title)s' \
   --embed-thumbnail \
-  "$1"
+  "$1"'
   cd ~
 }
 
