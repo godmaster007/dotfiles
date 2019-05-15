@@ -178,9 +178,9 @@ YDL_M () {
 
 # Download playlist as MP3 files into shared directory
 YDL_MS () {
-  cd /mnt/c/Users/nicho/Downloads/YoutubeDL/mp3
+  'cd /mnt/c/Users/nicho/Downloads/YoutubeDL/mp3
   youtube-dl \
-  '--download-archive downloaded.txt \
+  --download-archive downloaded.txt \
   --no-post-overwrites \
   --audio-quality 320K \
   --add-metadata -ciwx \
