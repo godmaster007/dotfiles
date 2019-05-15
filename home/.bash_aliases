@@ -178,7 +178,7 @@ YDL_M () {
 
 # Download playlist as MP3 files into shared directory
 YDL_MS () {
-  'cd /mnt/c/Users/nicho/Downloads/YoutubeDL/mp3
+  cd /mnt/c/Users/nicho/Downloads/YoutubeDL/mp3
   youtube-dl \
   --download-archive downloaded.txt \
   --no-post-overwrites \
@@ -187,7 +187,7 @@ YDL_MS () {
   --audio-format mp3 -o '%(title)s.%(ext)s' \
   --metadata-from-title '%(artist)s - %(title)s' \
   --embed-thumbnail \
-  "$1"'
+  "$1"
   cd ~
 }
 
