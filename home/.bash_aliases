@@ -1,5 +1,6 @@
 # .bash_aliases
 # lets see if vscode can update github
+# now its time for some changes with atom!
 
 ################################################################################
 # TESTING
