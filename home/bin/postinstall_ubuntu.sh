@@ -42,7 +42,7 @@ options=(1.0 "Update & Clean" off
 1.7 "Repositories" off
 1.8 "Disable Error Reporting (Remove Apport)" off
 1.9 "NA" off
-2.0 "NA" off
+2.0 "Windows 10 Ubuntu Apps (non gui)" off
 3.0 "Essential Apps" off
 4 "Media" off
 5 "Restricted Extras" off
@@ -234,7 +234,14 @@ do
     
     
     2.0)
-    # NA
+        # Windows 10 Ubuntu Apps (non-gui)
+    # Installs a list of essential linux apps
+    for line in $(cat $HOME/bin/win_ubuntu_apps.txt); do
+      sudo apt -y install $line
+      if [[ ! $? -eq 0 ]]; then
+        echo "Problem in apt install $line" >> output.log
+      fi
+    done
     ;;
     
     
