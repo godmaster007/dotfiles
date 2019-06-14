@@ -1,18 +1,15 @@
-## .bash_aliases
-
-# View
-alias VBA!='clear; clear; c ~/.bash_aliases'
-# Source
-alias SA!='source ~/.bashrc'
 ###########################################################
-
-
-## git (Homeshick)
-
+## BASH ALIASES (.bash_aliases)
+# View
+alias VB='clear; clear; c ~/.bash_aliases'
+# Source
+alias SOURCE='source ~/.bashrc'
+###########################################################
+## GIT (Homeshick)
 # Check repo status
-alias CHECK!='homeshick check ; homeshick cd dotfiles && git status && cd ~'
+alias CHECK='homeshick check ; homeshick cd dotfiles && git status && cd ~'
 # Download current repo version
-alias PULL!='homeshick pull'
+alias PULL='homeshick pull'
 # Add more files to the dotfiles repo
 TRACK! () {
   homeshick track dotfiles "$1"
@@ -20,7 +17,7 @@ TRACK! () {
 # Adds a commit to local dotfiles changes then push to master repo
 # Argument 1 (Description of changes in quotes)
 # Example (PUSH! "New changes to the file")
-PUSH! () {
+PUSH () {
   homeshick cd dotfiles
   git add .
   git commit -am "$1"
@@ -28,10 +25,7 @@ PUSH! () {
   cd ~
 }
 ###########################################################
-
-
 ## System Config (Debian)
-
 # Maintenance
 alias UPDATE='sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y'
 alias CLEAN='sudo apt autoremove -y && sudo apt autoclean -y && sudo apt clean -y'
@@ -108,13 +102,9 @@ alias tcpdump='tcpdump -i eth1'
 # Query or control network driver and hardware settings
 alias ethtool='ethtool eth1'
 ###########################################################
-
-
-## youtube-dl
-
+## YOUTUBE-DL (youtube-dl)
 # Use inside destination directorly
 # Troubleshoot: "youtube-dl -F --verbose https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-cSmEL0MmKfx02_Y7lKxDyH"
-
 # Download playlist as MP3 files
 YD_M () {
   youtube-dl \
@@ -166,20 +156,14 @@ YD_WS () {
   cd ~
 }
 ###########################################################
-
-
 ## Dropbox-Uploader
-
 # This app enables commandline functionality for dropbox
 # Details - https://github.com/andreafabrizi/Dropbox-Uploader
 alias DBU='./Dropbox-Uploader/dropbox_uploader.sh'
 # Example - Upload aliases to dropbox root dir
 #   DBU upload ~/.bash_aliases /
 ###########################################################
-
-
 ## Password Generator
-
 function randpassw(){
   if [ -z $1 ]; then
     MAXSIZE=10
@@ -202,85 +186,64 @@ function randpassw(){
   echo
 }
 ###########################################################
-
-
 ## File Management
-
 # Drive Details - size, mountpoint, etc
 alias DISK!="sudo lshw -C disk;uname -a"
-
 # Formating
-# Shred & zero fill
 # Example (zero fill only) - "sudo shred -vzn 0 /dev/sda"
 # Example (shred twice then zero fill) - "sudo shred -vzn 2 /dev/sda"
-
-# View Directory
+#
 # Tree view
 function tree(){
   pwd
   ls -R | grep ":$" |   \
   sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 }
-
 # Directory Contents
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
-
-#View Hidden Files
+# View Hidden Files
 alias l.='ls -d .* --color=auto'
 alias lsh="ls -ld .??*"
-
-#Disk Usage
+# Disk Usage
 alias df="df -H"
 alias du="du -ch"
 alias du1='du -d 1'
-
-#RSYNC - Copy with Progress & Resume
+# RSYNC - Copy with Progress & Resume
 alias rsyncp="rsync --progress -ravz"
-
-#Move files and folders recursive, preserve perm and owner
+# Move files and folders recursive, preserve perm and owner
 alias moveff="cd /source/directory; tar cf - . | tar xf - -C /destination/directory"
-
-#WGET - Continous Web Downloader
+# WGET - Continous Web Downloader
 alias wget="wget -c"
 ###########################################################
-
-
 ## Custom Settings 
-
 # Short Cuts
 alias h="clear; c ~/.bash_history"
 alias j="jobs -l"
 alias ..="cd ../"
 alias ...="cd ../../"
 alias ....="cd ../../../"
-
 # Parenting changing perms on /
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
-
 # Confirmations
 alias mv='mv -i'
 alias cp='cp -i'
 alias ln='ln -i'
 alias rm='rm -i'
-
 # Python Pigments - Syntax Highlighting
 alias c='pygmentize -g'
-
 # Highlighting with Rows
 alias cc='pygmentize -g -O style=colorful,linenos=1'
-
 # Powerswitches
 alias reboot='sudo reboot -h now'
 alias poweroff='sudo /sbin/poweroff'
 alias halt='sudo /sbin/halt'
 alias shutdown='sudo /sbin/shutdown -P now'
-
 # Plex Server - Manually turn screen off and on
 alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
 ###########################################################
