@@ -110,9 +110,37 @@ alias ethtool='ethtool eth1'
 ###########################################################
 ## YOUTUBE-DL
 #########################################################
-# Use inside destination directorly
+# $1 = LINK (Either song or playlist link from youtube)
+# TEST1 = https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-fdN6fcVne88peQ97qjGW-4
+# TEST2 = https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-co5UkkjbMf8R_KWnM_KFBz
+# $2 = DESTINATION (Full path, if VM create dir with host first)
+# TEST1 DIR = cd /mnt/c/Users/nicho/Youtube/TEST1
+# TEST2 DIR = cd /mnt/c/Users/nicho/Youtube/TEST2
+# $3 = FORMAT (Either mp3 OR wav *if unspecified default is mp3*)
+# 
+#
+#
 # Troubleshoot: "youtube-dl -F --verbose https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-cSmEL0MmKfx02_Y7lKxDyH"
 # Download playlist as MP3 files
+# WORKING OUT THE BUGGS
+# YD () {
+#   "$2"
+#   youtube-dl \
+#   --download-archive downloaded.txt \
+#   --no-post-overwrites \
+#   --audio-quality 320K \
+#   --add-metadata -ciwx \
+#   --audio-format "$3" -o '%(title)s.%(ext)s' \
+#   --metadata-from-title '%(artist)s - %(title)s' \
+#   if [ "$3" = 'mp3' ]; then
+#     --embed-thumbnail \
+#   fi
+#   "$1"
+#   cd ~
+# }
+
+
+
 YD_M () {
   youtube-dl \
   --download-archive downloaded.txt \
