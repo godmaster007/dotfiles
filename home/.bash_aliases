@@ -17,9 +17,9 @@ alias PULL='homeshick pull'
 TRACK! () {
   homeshick track dotfiles "$1"
 }
-# Adds a commit to local dotfiles changes then push to master repo
-# Argument 1 (Description of changes in quotes)
-# Example (PUSH! "New changes to the file")
+# Update master repo with new changes
+# $1 (Short description of changes with quotes " ")
+# Example (PUSH "Changed some stuff")
 PUSH () {
   homeshick cd dotfiles
   git add .
@@ -34,9 +34,15 @@ PUSH () {
 # Maintenance
 alias UPDATE='sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y'
 alias CLEAN='sudo apt autoremove -y && sudo apt autoclean -y && sudo apt clean -y'
+
+alias UC='sudo apt update ; sudo apt upgrade -y ; \
+sudo apt dist-upgrade -y ; sudo apt autoremove -y ; \
+sudo apt autoclean -y ; sudo apt clean -y'
+
 alias UC!='UPDATE && CLEAN'
-alias UCR!='UPDATE && CLEAN && reboot'
-alias UCS!='UPDATE && CLEAN && shutdown'
+alias UCR='UC ; reboot'
+alias UCS='UC ; shutdown'
+
 # View Installed Packages
 showpkg () {
   apt-cache pkgnames | grep -i "$1" | sort
