@@ -1,24 +1,29 @@
 ###########################################################
 ## BASH ALIASES (.bash_aliases)
 ###########################################################
-# View
+
+# VIEW BASH ALIASES SYNTAX
 alias VB='clear; clear; c ~/.bash_aliases'
-# Source
-alias SOURCE='source ~/.bashrc'
+
+# REFRESH SHELL SETTINGS
+alias SOURCE='. ~/.bashrc'
 
 ###########################################################
 ## GIT (HOMESHICK)
 ###########################################################
-# Check repo status
+
+# CHECK STATUS
 alias CHECK='homeshick check ; homeshick cd dotfiles && git status && cd ~'
-# Download current repo version
+
+# DOWNLOAD CURRENT VERSION
 alias PULL='homeshick pull'
-# Add more files to the dotfiles repo
+
+# ADD ADDITIONAL FILES TO DOTFILES CASTLE
 TRACK! () {
   homeshick track dotfiles "$1"
 }
-# Update master repo with new changes
-# $1 (Short description of changes with quotes " ")
+
+# PUSH LOCAL CHANGES TO MASTER BRANCH
 # Example (PUSH "Changed some stuff")
 PUSH () {
   homeshick cd dotfiles
