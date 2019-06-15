@@ -1,11 +1,14 @@
 ###########################################################
 ## BASH ALIASES (.bash_aliases)
+###########################################################
 # View
 alias VB='clear; clear; c ~/.bash_aliases'
 # Source
 alias SOURCE='source ~/.bashrc'
+
 ###########################################################
-## GIT (Homeshick)
+## GIT (HOMESHICK)
+###########################################################
 # Check repo status
 alias CHECK='homeshick check ; homeshick cd dotfiles && git status && cd ~'
 # Download current repo version
@@ -24,8 +27,10 @@ PUSH () {
   git push
   cd ~
 }
+
 ###########################################################
-## System Config (Debian)
+## SYS CONFIG (DEBIAN)
+###########################################################
 # Maintenance
 alias UPDATE='sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y'
 alias CLEAN='sudo apt autoremove -y && sudo apt autoclean -y && sudo apt clean -y'
@@ -101,8 +106,10 @@ alias iftop='iftop -i eth1'
 alias tcpdump='tcpdump -i eth1'
 # Query or control network driver and hardware settings
 alias ethtool='ethtool eth1'
+
 ###########################################################
-## YOUTUBE-DL (youtube-dl)
+## YOUTUBE-DL
+#########################################################
 # Use inside destination directorly
 # Troubleshoot: "youtube-dl -F --verbose https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-cSmEL0MmKfx02_Y7lKxDyH"
 # Download playlist as MP3 files
@@ -155,15 +162,19 @@ YD_WS () {
   "$1"
   cd ~
 }
+
 ###########################################################
-## Dropbox-Uploader
+## DROPBOX-UPLOADER
+###########################################################
 # This app enables commandline functionality for dropbox
 # Details - https://github.com/andreafabrizi/Dropbox-Uploader
 alias DBU='./Dropbox-Uploader/dropbox_uploader.sh'
 # Example - Upload aliases to dropbox root dir
 #   DBU upload ~/.bash_aliases /
+
 ###########################################################
-## Password Generator
+## PASS GENERATOR
+###########################################################
 function randpassw(){
   if [ -z $1 ]; then
     MAXSIZE=10
@@ -185,8 +196,10 @@ function randpassw(){
   done
   echo
 }
+
 ###########################################################
-## File Management
+## FILE MANAGEMENT
+###########################################################
 # Drive Details - size, mountpoint, etc
 alias DISK!="sudo lshw -C disk;uname -a"
 # Formating
@@ -218,8 +231,10 @@ alias rsyncp="rsync --progress -ravz"
 alias moveff="cd /source/directory; tar cf - . | tar xf - -C /destination/directory"
 # WGET - Continous Web Downloader
 alias wget="wget -c"
+
 ###########################################################
-## Custom Settings 
+## SETTINGS
+###########################################################
 # Short Cuts
 alias h="clear; c ~/.bash_history"
 alias j="jobs -l"
@@ -246,4 +261,7 @@ alias halt='sudo /sbin/halt'
 alias shutdown='sudo /sbin/shutdown -P now'
 # Plex Server - Manually turn screen off and on
 alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
+
+###########################################################
+## 
 ###########################################################
