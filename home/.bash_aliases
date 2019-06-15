@@ -32,14 +32,14 @@ PUSH () {
 ## SYS CONFIG (DEBIAN)
 ###########################################################
 # Maintenance
-alias UPDATE='sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y'
-alias CLEAN='sudo apt autoremove -y && sudo apt autoclean -y && sudo apt clean -y'
+#alias UPDATE='sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y'
+#lias CLEAN='sudo apt autoremove -y && sudo apt autoclean -y && sudo apt clean -y'
 
 alias UC='sudo apt update ; sudo apt upgrade -y ; \
 sudo apt dist-upgrade -y ; sudo apt autoremove -y ; \
 sudo apt autoclean -y ; sudo apt clean -y'
 
-alias UC!='UPDATE && CLEAN'
+#alias UC!='UPDATE && CLEAN'
 alias UCR='UC ; reboot'
 alias UCS='UC ; shutdown'
 
