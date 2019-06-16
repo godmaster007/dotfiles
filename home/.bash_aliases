@@ -150,6 +150,27 @@ alias ethtool='ethtool eth1'
 
 # NEW DYNAMIC CONFIG TESTING
 
+PL1='https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-fdN6fcVne88peQ97qjGW-4'
+PL2='https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-co5UkkjbMf8R_KWnM_KFBz'
+PL1D="cd $HOME/Music/Youtube/TEST1"
+PL2D="cd $HOME/Music/Youtube/TEST2"
+
+YD1 () {
+  $PL1D
+  youtube-dl \
+  --download-archive PL1D_downloaded.txt \
+  --no-post-overwrites \
+  --audio-quality 320K \
+  --add-metadata -ciwx \
+  --audio-format "mp3" -o '%(title)s.%(ext)s' \
+  --metadata-from-title '%(artist)s - %(title)s' \
+  --embed-thumbnail \
+  $PL1;
+  cd ~
+}
+
+
+
 # $1 = LINK (Either song or playlist link from youtube)
 # TEST1 = https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-fdN6fcVne88peQ97qjGW-4
 # TEST2 = https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-co5UkkjbMf8R_KWnM_KFBz
