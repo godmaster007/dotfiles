@@ -175,9 +175,6 @@ do
     # #echo Will set the remote url origin of your repo to: git@github.com:$git_user/"$git_repo".git
     # echo Will set the remote url origin of your repo to: https://www.github.com/"$git_user"/"$git_repo".git
 
-
-
-
     # echo Your Github Variables:\n
     #  Username: $git_user
     #  Email: 
