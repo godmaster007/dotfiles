@@ -1,34 +1,28 @@
 #!/bin/bash
 
-
-################################################################################
-# Run in Debug mode
-################################################################################
+##############
+## Debuging ##
+##############
 #set -x
 #set -e
 #set -v
 
-
-
-
-
-################################################################################
-# Define Variables
-################################################################################
+######################
+## Define Variables ##
+######################
 # Shows which flavor of ubuntu is installed
 FLAVOR=`echo $XDG_SESSION_DESKTOP`
 # Shortcut for system maintence comands, change "apt" to "apt-get" if needed
 INSTALL="sudo apt -y install"
 
+##################
+## Define Paths ##
+##################
+#
 
-################################################################################
-# Define Paths
-################################################################################
-
-
-################################################################################
-# Configure GUI Install Options
-################################################################################
+###################################
+## Configure GUI Install Options ##
+###################################
 # Install Dialog
 $INSTALL dialog
 # Not sure what this command is doing besides defining the heading
@@ -141,23 +135,55 @@ do
     echo -n "Enter your Github Repo (ex: dotfiles) and press [ENTER]: "
     read git_repo
     
-    # These if's test if the variable is is null (has length 0)
-    # This way if no input is entered it will auto setup my default config
+    # # These if's test if the variable is is null (has length 0)
+    # # This way if no input is entered it will auto setup my default config
+    # if [ -z $git_user ]; then
+    #   git_user='godmaster007'
+    # elif [ -z $git_email ]; then
+    #   git_email='default+default@gmail.com'
+    # elif [ -z $git_repo ]; then
+    #   git_repo='dotfiles'
+    # else
+    #   echo "Custom settings aquired"
+    # fi
+
+    # If user doesn't answer variable questions the default is used
+    # -z (has length 0)
     if [ -z $git_user ]; then
       git_user='godmaster007'
-    elif [ -z $git_email ]; then
-      git_email='default+default@gmail.com'
-    elif [ -z $git_repo ]; then
-      git_repo='dotfiles'
-    else
-      echo "Custom settings aquired"
+    fi
+
+    if [ -z $git_email ]; then
+      git_email='default@gmail.com'
     fi
     
-    echo Your github username is: $git_user
-    echo Your github email is: $git_email
-    echo Your github reponame is: $git_repo
-    #echo Will set the remote url origin of your repo to: git@github.com:$git_user/"$git_repo".git
-    echo Will set the remote url origin of your repo to: https://www.github.com/"$git_user"/"$git_repo".git
+    if [ -z $git_repo ]; then
+      git_repo='dotfiles'
+    fi
+
+    echo "Your Github variables are:\n
+     Username: $git_user\n
+     Email: $git_email\n
+     Reponame: $git_repo"
+    
+    echo "Remote URL origin of repo will be set as:\n
+    https://www.github.com/"$git_user"/"$git_repo".git"
+
+    git_URL="https://www.github.com/"$git_user"/"$git_repo".git"
+
+    # #echo Will set the remote url origin of your repo to: git@github.com:$git_user/"$git_repo".git
+    # echo Will set the remote url origin of your repo to: https://www.github.com/"$git_user"/"$git_repo".git
+
+
+
+
+    # echo Your Github Variables:\n
+    #  Username: $git_user
+    #  Email: 
+    # echo Your github email is: $git_email
+    # echo Your github reponame is: $git_repo
+    # #echo Will set the remote url origin of your repo to: git@github.com:$git_user/"$git_repo".git
+    # echo Will set the remote url origin of your repo to: https://www.github.com/"$git_user"/"$git_repo".git
     
     # Clone homeshick
     git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
