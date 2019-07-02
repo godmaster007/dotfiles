@@ -150,10 +150,10 @@ do
       git_repo='dotfiles'
     fi
 
-    echo "#### Your Github variables are:\n
-     Username: $git_user\n
-     Email: $git_email\n
-     Reponame: $git_repo ####"
+    echo "#### Your Github variables are ####
+     Username: $git_user
+     Email: $git_email
+     Reponame: $git_repo"
     
     echo "Remote URL origin:\n
     https://www.github.com/"$git_user"/"$git_repo".git"
@@ -204,7 +204,7 @@ do
     homeshick --batch clone $git_URL
     # May need to switch back to SSH git@github.com:godmaster007/dotfiles.git
     source $HOME/.bashrc
-    source $HOME/.homesick/repos/homeshick/homeshick.sh
+    #source $HOME/.homesick/repos/homeshick/homeshick.sh
     
     # homeshick cd dotfiles
     cd $HOME/.homesick/repos/dotfiles
