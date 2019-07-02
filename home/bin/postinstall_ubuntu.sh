@@ -165,13 +165,19 @@ do
 
     # Clone homeshick
     git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
-    
+
     # Add homeshick to .bashrc, enable auto completion and auto refresh
     printf '\n# Source
     if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
       source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-      source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
     fi' >> $HOME/.bashrc
+    
+    # # Add homeshick to .bashrc, enable auto completion and auto refresh
+    # printf '\n# Source
+    # if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
+    #   source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+    #   source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+    # fi' >> $HOME/.bashrc
     
     # Enable Auto Refresh
     printf '\n# Auto Refresh
@@ -184,7 +190,7 @@ do
     #   source $HOME/.homesick/repos/homeshick/homeshick.sh
     # fi
     
-        # Clone private dotfiles repo
+    # Clone private dotfiles repo
     if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
       git clone $git_URL $HOME/.homesick/repos/homeshick "$git_user"/"$git_repo"
       source $HOME/.homesick/repos/homeshick/homeshick.sh
