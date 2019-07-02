@@ -190,17 +190,18 @@ do
     #   source $HOME/.homesick/repos/homeshick/homeshick.sh
     # fi
     
-    # Clone private dotfiles repo
-    if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
-      git clone $git_URL $HOME/.homesick/repos/homeshick "$git_user"/"$git_repo"
-      source $HOME/.homesick/repos/homeshick/homeshick.sh
-    fi
+    # # Clone private dotfiles repo
+    # if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
+    #   git clone $git_URL $HOME/.homesick/repos/homeshick "$git_user"/"$git_repo"
+    #   source $HOME/.homesick/repos/homeshick/homeshick.sh
+    # fi
 
 
     # Homeshick (HTTPS batch clone dotfiles to new machine)
     # "--batch" bypasses user input questions like yes/no
     # Cloning from the HTTPS link doesn't require SSH keys to be configured
-    homeshick --batch clone https://github.com/"$git_user"/"$git_repo".git
+    #homeshick --batch clone https://github.com/"$git_user"/"$git_repo".git
+    homeshick --batch clone $git_URL
     # May need to switch back to SSH git@github.com:godmaster007/dotfiles.git
     source $HOME/.bashrc
     source $HOME/.homesick/repos/homeshick/homeshick.sh
