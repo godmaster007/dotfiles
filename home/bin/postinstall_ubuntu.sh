@@ -3,9 +3,9 @@
 ##############
 ## Debuging ##
 ##############
-#set -x
-#set -e
-#set -v
+set -x
+set -e
+set -v
 
 ######################
 ## Define Variables ##
@@ -14,6 +14,7 @@
 FLAVOR=`echo $XDG_SESSION_DESKTOP`
 # Shortcut for system maintence comands, change "apt" to "apt-get" if needed
 INSTALL="sudo apt -y install"
+Postinstall_script_URL='https://git.io/fjKSF'
 
 ##################
 ## Define Paths ##
