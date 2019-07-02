@@ -150,12 +150,12 @@ do
       git_repo='dotfiles'
     fi
 
-    echo "Your Github variables are:\n
+    echo "#### Your Github variables are:\n
      Username: $git_user\n
      Email: $git_email\n
-     Reponame: $git_repo"
+     Reponame: $git_repo ####"
     
-    echo "Remote URL origin of repo will be set as:\n
+    echo "Remote URL origin:\n
     https://www.github.com/"$git_user"/"$git_repo".git"
 
     git_URL="https://www.github.com/"$git_user"/"$git_repo".git"
@@ -211,6 +211,7 @@ do
     git config --global user.email "$git_email"
     git config --global user.name "$git_user"
     git remote set-url origin git@github.com:"$git_user"/"$git_repo".git
+    homeshick link
     cd ~
     ;;
     
