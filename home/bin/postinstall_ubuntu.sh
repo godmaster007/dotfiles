@@ -3,7 +3,7 @@
 ##############
 ## Debuging ##
 ##############
-set -x
+#set -x
 #set -e
 set -v
 
@@ -14,7 +14,7 @@ set -v
 FLAVOR=`echo $XDG_SESSION_DESKTOP`
 # Shortcut for system maintence comands, change "apt" to "apt-get" if needed
 INSTALL="sudo apt -y install"
-Postinstall_script_URL='https://git.io/fjKSF'
+post_dl='https://git.io/fjKSF'
 
 ##################
 ## Define Paths ##
@@ -136,18 +136,6 @@ do
     echo -n "Enter your Github Repo (ex: dotfiles) and press [ENTER]: "
     read git_repo
     
-    # # These if's test if the variable is is null (has length 0)
-    # # This way if no input is entered it will auto setup my default config
-    # if [ -z $git_user ]; then
-    #   git_user='godmaster007'
-    # elif [ -z $git_email ]; then
-    #   git_email='default+default@gmail.com'
-    # elif [ -z $git_repo ]; then
-    #   git_repo='dotfiles'
-    # else
-    #   echo "Custom settings aquired"
-    # fi
-
     # If user doesn't answer variable questions the default is used
     # -z (has length 0)
     if [ -z $git_user ]; then
@@ -172,17 +160,9 @@ do
 
     git_URL="https://www.github.com/"$git_user"/"$git_repo".git"
 
-    # #echo Will set the remote url origin of your repo to: git@github.com:$git_user/"$git_repo".git
-    # echo Will set the remote url origin of your repo to: https://www.github.com/"$git_user"/"$git_repo".git
+    #Repo remote url origin SSH: git@github.com:$git_user/"$git_repo".git
+    #Repo remote url origin HTTPS:  https://www.github.com/"$git_user"/"$git_repo".git
 
-    # echo Your Github Variables:\n
-    #  Username: $git_user
-    #  Email: 
-    # echo Your github email is: $git_email
-    # echo Your github reponame is: $git_repo
-    # #echo Will set the remote url origin of your repo to: git@github.com:$git_user/"$git_repo".git
-    # echo Will set the remote url origin of your repo to: https://www.github.com/"$git_user"/"$git_repo".git
-    
     # Clone homeshick
     git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
     
