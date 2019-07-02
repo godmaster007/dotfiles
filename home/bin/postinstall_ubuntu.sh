@@ -166,7 +166,7 @@ do
     # Clone homeshick
     git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
 
-    # Add homeshick to .bashrc, enable auto completion and auto refresh
+    # Add homeshick to .bashrc
     printf '\n# Source
     if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
       source "$HOME/.homesick/repos/homeshick/homeshick.sh"
