@@ -46,7 +46,7 @@ options=(1.0 "Update & Clean" off
 8 "Docky (Desktop app launcher)" off
 9 "Chrome" off
 10 "Thunderbird" off
-11 "NA" off
+11 "Plank (Dsktop app launcher)" off
 12 "NA" off
 13 "NA" off
 14 "Wallpapers" off
@@ -344,7 +344,8 @@ do
     
     
     11)
-    # NA
+    # Plank (Desktop app launcher)
+    sudo apt -y install plank
     ;;
     
     
