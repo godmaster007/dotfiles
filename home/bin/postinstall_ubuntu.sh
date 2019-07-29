@@ -77,7 +77,8 @@ options=(1.0 "Update & Clean" off
 37 "Slack (Team Collaboration)" off
 38 "na" off
 39 "Vtop (System Monitor)" off
-40 "Libreoffice" off)
+40 "Libreoffice" off
+41 "Kali (XFCE) Enable Autologin" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -662,6 +663,14 @@ do
     sudo add-apt-repository ppa:libreoffice/ppa -y
     sudo apt update
     $INSTALL libreoffice
+    ;;
+
+    41)
+    # Kali (XFCE) Enable Autologin
+    # uncomment and add root to autologin settings
+    sed -i 's/#autologin-user=/autologin-user=root/g' /etc/lightdm/lightdm.conf
+    # change syntax in autologin config
+    sed -i 's/!= root quiet_success/!= anything quiet_success/g' /etc/pam.d/lightdm-autologin
     ;;
     
   esac
