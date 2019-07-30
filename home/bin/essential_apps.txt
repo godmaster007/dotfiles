@@ -28,4 +28,4 @@ gedit gedit-plugins
 nano
 vim vim-addon-manager
 xclip
-
+docky

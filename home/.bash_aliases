@@ -1,6 +1,6 @@
-#####################
-### .bash_aliases ###
-#####################
+###############################################################################
+# .bash_aliases
+###############################################################################
 
 # Display alias syntax
 alias VB='clear; clear; c ~/.bash_aliases'
@@ -11,9 +11,9 @@ alias SOURCE='. ~/.bashrc'
 # Download bootstrap.sh
 alias BOOT='sudo apt -y install curl; curl -sLo bootstrap.sh git.io/fhdhf && chmod +x bootstrap.sh'
 
-#######################
-### Git - Homeshick ###
-#######################
+###############################################################################
+# Git - Homeshick
+###############################################################################
 
 # Check status
 alias CHECK='homeshick check ; homeshick cd dotfiles && git status && cd ~'
@@ -35,10 +35,9 @@ PUSH () {
   cd ~
 }
 
-
-#################
-### Processes ###
-#################
+###############################################################################
+# Processes
+###############################################################################
 
 # Tload - System Load Graphic
 alias sysload="tload -s 10"
@@ -80,10 +79,9 @@ kp () {
   return;
 }
 
-
-##############
-### Config ###
-##############
+###############################################################################
+# Config
+###############################################################################
 
 # Update & Clean plus reboot or shutdown
 alias UC='sudo apt update ; sudo apt upgrade -y ; \
@@ -101,19 +99,17 @@ showpkg () {
 # Install
 alias INSTALL='sudo apt -y install'
 
-
-################
-### Security ###
-################
+###############################################################################
+# Security
+###############################################################################
 
 # SSH Keys (Generate) - EI(SSHKEY)
 alias SSHKEY='yes "" | ssh-keygen -t rsa -b 4096'
 # SSH Keys (Copy) - IE (ssh-copy-id -p 2022 root@76.14.134.182)
 
-
-##################
-### Networking ###
-##################
+###############################################################################
+# Networking
+###############################################################################
 
 # Nmap - Network Mapper & Port Scanner
 alias NMAP='nmap --iflist'
@@ -146,9 +142,9 @@ alias tcpdump='tcpdump -i eth1'
 alias ethtool='ethtool eth1'
 
 
-##################
-### Youtube-dl ###
-##################
+###############################################################################
+#Youtube-dl
+###############################################################################
 
 # NEW DYNAMIC CONFIG TESTING
 
@@ -249,20 +245,18 @@ YD_WS () {
   cd ~
 }
 
-
-########################
-### Dropbox-Uploader ###
-########################
+###############################################################################
+# Dropbox-Uploader
+###############################################################################
 
 # Commandline functionality
 # Source (https://github.com/andreafabrizi/Dropbox-Uploader)
 # IE - Upload aliases to dropbox root (DBU upload ~/.bash_aliases /)
 alias DBU='./Dropbox-Uploader/dropbox_uploader.sh'
 
-
-##########################
-### Password Generator ###
-##########################
+###############################################################################
+# Password Generator
+###############################################################################
 
 function randpassw(){
   if [ -z $1 ]; then
@@ -286,10 +280,9 @@ function randpassw(){
   echo
 }
 
-
-#######################
-### File Management ###
-#######################
+###############################################################################
+# File Management
+###############################################################################
 
 # Drive Details
 alias DISK!="sudo lshw -C disk;uname -a"
@@ -328,10 +321,9 @@ alias moveff="cd /source/directory; tar cf - . | tar xf - -C /destination/direct
 # WGET - Continous Web Downloader
 alias wget="wget -c"
 
-
-################
-### Settings ###
-################
+###############################################################################
+# Settings
+###############################################################################
 
 # Short Cuts
 alias h="clear; c ~/.bash_history"
@@ -365,3 +357,43 @@ alias shutdown='sudo /sbin/shutdown -P now'
 
 # Plex Server - Manually turn screen off and on
 alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
+
+###############################################################################
+# Extractor
+###############################################################################
+
+function extract {
+ if [ -z "$1" ]; then
+    # display usage if no parameters given
+    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+    echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
+    return 1
+ else
+    for n in $@
+    do
+      if [ -f "$n" ] ; then
+          case "${n%,}" in
+            *.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar) 
+                         tar xvf "$n"       ;;
+            *.lzma)      unlzma ./"$n"      ;;
+            *.bz2)       bunzip2 ./"$n"     ;;
+            *.rar)       unrar x -ad ./"$n" ;;
+            *.gz)        gunzip ./"$n"      ;;
+            *.zip)       unzip ./"$n"       ;;
+            *.z)         uncompress ./"$n"  ;;
+            *.7z|*.arj|*.cab|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.rpm|*.udf|*.wim|*.xar)
+                         7z x ./"$n"        ;;
+            *.xz)        unxz ./"$n"        ;;
+            *.exe)       cabextract ./"$n"  ;;
+            *)
+                         echo "extract: '$n' - unknown archive method"
+                         return 1
+                         ;;
+          esac
+      else
+          echo "'$n' - file does not exist"
+          return 1
+      fi
+    done
+fi
+}
