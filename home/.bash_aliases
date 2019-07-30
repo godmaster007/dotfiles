@@ -8,6 +8,8 @@ alias VB='clear; clear; c ~/.bash_aliases'
 # Reload shell settings
 alias SOURCE='. ~/.bashrc'
 
+# Download bootstrap.sh
+alias BOOT='sudo apt -y install curl; curl -sLo bootstrap.sh git.io/fhdhf && chmod +x bootstrap.sh'
 
 #######################
 ### Git - Homeshick ###
