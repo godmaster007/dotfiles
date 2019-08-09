@@ -29,7 +29,7 @@ $INSTALL dialog
 # Not sure what this command is doing besides defining the heading
 cmd=(dialog --separate-output --checklist "Select Software to Install:" 22 76 16)
 # Option can be set as default with "on"
-options=(1.0 "Update & Clean" off
+options=(1.0 "Update & Clean" on
 1.1 "SSH-KEY (Generate)" off
 1.2 "SSH-KEY (Paste pub key into Github)" off
 1.3 "Homeshick (Install)" off
