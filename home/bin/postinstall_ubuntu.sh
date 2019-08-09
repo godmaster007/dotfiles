@@ -55,8 +55,7 @@ options=(1.0 "Update & Clean" off
 17 "Virtualbox (Host)" off
 18 "Touchpad Indicator (Touch bad functionality)" off
 19 "Unetbootin (Startup disk creator)" off
-20 "Typora (Markdown Editor)" off
-20.1 "Boostnote (Markdown Editor for Programers)" off
+20 "Boostnote (Markdown Editor)" off
 21 "Dropbox" off
 22 "Dropbox-Uploader (Commandline Functionality)" off
 23 "Dropbox (Symlinks)" off
@@ -441,23 +440,6 @@ do
     
     
     20)
-    # Typora
-    # Text to markdown features.
-    # Import Public Key
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
-    wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
-    # Add Typora's repository
-    # Below command worked on xubuntu but not elementary vm
-    #   sudo add-apt-repository 'deb https://typora.io/linux ./'
-    #   sudo apt-get update
-    # Adding manually before installing
-    echo -e "\ndeb https://typora.io/linux ./" | sudo tee -a /etc/apt/sources.list
-    sudo apt-get update
-    sudo apt-get -y install typora
-    ;;
-    
-    
-    20.1)
     # Boostnote
     #wget https://github.com/BoostIO/boost-releases/releases/download/v0.11.15/boostnote_0.11.15_amd64.deb
     wget "https://github.com/BoostIO/boost-releases/releases/download/v0.12.1/boostnote_0.12.1_amd64.deb"
