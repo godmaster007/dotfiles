@@ -442,11 +442,13 @@ do
     20)
     # Boostnote
     #wget https://github.com/BoostIO/boost-releases/releases/download/v0.11.15/boostnote_0.11.15_amd64.deb
-    wget "https://github.com/BoostIO/boost-releases/releases/download/v0.12.1/boostnote_0.12.1_amd64.deb"
-    sudo dpkg -i "$(ls -t | head -n1)"
+    wget -O boostnoteINSTALL.deb "https://github.com/BoostIO/boost-releases/releases/download/v0.12.1/boostnote_0.12.1_amd64.deb"
+    sudo dpkg -i boostnoteINSTALL.deb
+    #sudo dpkg -i "$(ls -t | head -n1)"
     #sudo dpkg -i boostnote_0.11.15_amd64.deb
+    rm "boostnoteINSTALL.deb" -y
     #rm boostnote_0.11.15_amd64.deb
-    rm "$(ls -t | head -n1)"
+    #rm "$(ls -t | head -n1)"
     ;;
     
     
