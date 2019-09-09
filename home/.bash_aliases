@@ -94,8 +94,8 @@ sudo apt dist-upgrade -y ; \
 sudo apt autoremove -y ; \
 sudo apt autoclean -y ; \
 sudo apt clean -y'
-alias UCR='UC ; sudo reboot -h now'
-alias UCS='UC ; sudo shutdown -h now'
+alias UCR='UC ; REBOOT'
+alias UCS='UC ; SHUTDOWN'
 
 # View Installed Packages
 showpkg () {
@@ -357,10 +357,10 @@ alias c='pygmentize -g'
 alias cc='pygmentize -g -O style=colorful,linenos=1'
 
 # Powerswitches
-alias reboot='sudo reboot -h now'
+alias REBOOT='sudo reboot -h now'
 alias poweroff='sudo /sbin/poweroff'
 alias halt='sudo /sbin/halt'
-alias shutdown='sudo /sbin/shutdown -P now'
+alias SHUTDOWN='sudo /sbin/shutdown -P now'
 
 # Plex Server - Manually turn screen off and on
 alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
