@@ -1,5 +1,5 @@
 ###############################################################################
-# .bash_aliases
+## .bash_aliases
 ###############################################################################
 
 # Display alias syntax
@@ -15,7 +15,7 @@ alias DLBOOT='sudo apt -y install curl; curl -sLo bootstrap.sh git.io/fhdhf && c
 #history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 
 ###############################################################################
-# Git - Homeshick
+## Git - Homeshick
 ###############################################################################
 
 # Check status
@@ -39,7 +39,7 @@ PUSH () {
 }
 
 ###############################################################################
-# Processes
+## Processes
 ###############################################################################
 
 # Tload - System Load Graphic
@@ -83,15 +83,19 @@ kp () {
 }
 
 ###############################################################################
-# Config
+## Config
 ###############################################################################
 
 # Update & Clean plus reboot or shutdown
-alias UC='sudo apt update ; sudo apt upgrade -y ; \
-sudo apt dist-upgrade -y ; sudo apt autoremove -y ; \
-sudo apt autoclean -y ; sudo apt clean -y'
-alias UCR='UC ; reboot'
-alias UCS='UC ; shutdown'
+alias UC='\
+sudo apt update ; \
+sudo apt upgrade -y ; \
+sudo apt dist-upgrade -y ; \
+sudo apt autoremove -y ; \
+sudo apt autoclean -y ; \
+sudo apt clean -y'
+alias UCR='UC ; sudo reboot -h now'
+alias UCS='UC ; sudo shutdown -h now'
 
 # View Installed Packages
 showpkg () {
@@ -103,7 +107,7 @@ showpkg () {
 alias INSTALL='sudo apt -y install'
 
 ###############################################################################
-# Security
+## Security
 ###############################################################################
 
 # SSH Keys (Generate) - EI(SSHKEY)
@@ -111,7 +115,7 @@ alias SSHKEY='yes "" | ssh-keygen -t rsa -b 4096'
 # SSH Keys (Copy) - IE (ssh-copy-id -p 2022 root@76.14.134.182)
 
 ###############################################################################
-# Networking
+## Networking
 ###############################################################################
 
 # Nmap - Network Mapper & Port Scanner
@@ -146,7 +150,7 @@ alias ethtool='ethtool eth1'
 
 
 ###############################################################################
-#Youtube-dl
+## Youtube-dl
 ###############################################################################
 
 # NEW DYNAMIC CONFIG TESTING
@@ -249,7 +253,7 @@ YD_WS () {
 }
 
 ###############################################################################
-# Dropbox-Uploader
+## Dropbox-Uploader
 ###############################################################################
 
 # Commandline functionality
@@ -258,7 +262,7 @@ YD_WS () {
 alias DBU='./Dropbox-Uploader/dropbox_uploader.sh'
 
 ###############################################################################
-# Password Generator
+## Password Generator
 ###############################################################################
 
 function randpassw(){
@@ -284,7 +288,7 @@ function randpassw(){
 }
 
 ###############################################################################
-# File Management
+## File Management
 ###############################################################################
 
 # Drive Details
@@ -325,7 +329,7 @@ alias moveff="cd /source/directory; tar cf - . | tar xf - -C /destination/direct
 alias wget="wget -c"
 
 ###############################################################################
-# Settings
+## Settings
 ###############################################################################
 
 # Short Cuts
@@ -362,7 +366,7 @@ alias shutdown='sudo /sbin/shutdown -P now'
 alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
 
 ###############################################################################
-# Extractor
+## Extractor
 ###############################################################################
 
 function extract {
@@ -400,3 +404,4 @@ function extract {
     done
 fi
 }
+
