@@ -247,8 +247,11 @@ do
     
     
     1.9)
-    # Uses mlocate to find files
-    # Example "locate thunderbird"
+    # Edit Grub (Add nomodeset)
+    # Workaround for nvidia graphics drivers causing the bootup to fail
+    sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash nomodeset"/g' /etc/default/grub
+    sudo update-grub
+    echo "DON'T FORGET TO REBOOT"
     ;;
     
     
