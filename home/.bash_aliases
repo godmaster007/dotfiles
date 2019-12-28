@@ -1,6 +1,7 @@
 ###########################
 ## TESTING
 ###########################
+# Copies file contents to clipboard
 XC () {
   xclip -sel clip < "$1"
 }
