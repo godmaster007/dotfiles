@@ -13,17 +13,17 @@ p7zip-full p7zip-rar
 solaar
 python-pygments python3-pygments
 mlocate
-python-pip
+#python-pip
 npm
 htop
-net-tools
+#net-tools
 nmap
-zenmap
-ethtool
-filezilla
-putty
-iproute2 iproute2-doc
-chromium-browser
+#zenmap
+#ethtool
+#filezilla
+#putty
+#iproute2 iproute2-doc
+#chromium-browser
 gedit gedit-plugins
 nano
 vim vim-addon-manager
