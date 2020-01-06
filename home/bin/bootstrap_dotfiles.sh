@@ -135,7 +135,9 @@ homeshick --batch clone "https://github.com/$git_user/dotfiles.git"
 cd $HOME/.homesick/repos/dotfiles
 git config --global user.email "$git_email"
 git config --global user.name "$git_user"
-git remote set-url origin git@github.com:"$git_user"/dotfiles.git
+#git remote set-url origin git@github.com:"$git_user"/dotfiles.git
+# By setting url origin with https does not require pass when pulling
+git remote set-url origin https://github.com/$git_user/dotfiles.git
 cd ~
 source $HOME/.bashrc
 source $HOME/.homesick/repos/homeshick/homeshick.sh
