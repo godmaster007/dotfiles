@@ -5,7 +5,7 @@
 # Plex Server - Manually turn screen off and on
 alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
 
-# Copies file contents to clipboard
+# Copies file contents to clipboard, does not work with windows ubuntu shell
 CLIP () {
   xclip -sel clip < "$1"
 }
