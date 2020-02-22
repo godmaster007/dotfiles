@@ -29,3 +29,4 @@ nano
 vim vim-addon-manager
 xclip
 docky
+psensor
