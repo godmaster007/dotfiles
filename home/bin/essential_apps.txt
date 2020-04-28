@@ -7,13 +7,13 @@ make
 git
 gparted
 preload
-sshfs
+#sshfs
 dos2unix
 p7zip-full p7zip-rar
 solaar
 python-pygments python3-pygments
 mlocate
-#python-pip
+python-pip
 npm
 htop
 #net-tools
@@ -28,5 +28,5 @@ gedit gedit-plugins
 nano
 vim vim-addon-manager
 xclip
-docky
+#docky
 psensor
