@@ -33,3 +33,4 @@ filebot -script fn:amc \
 
 #--def excludeList=amc.txt
 #~/.filebot/logs/amc.txt
+#Testing
