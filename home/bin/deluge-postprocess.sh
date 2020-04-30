@@ -11,6 +11,9 @@ ARG_LABEL="N/A"
 # but paths such as /var/lib/deluge instead
 CONFIG_OUTPUT="/media/usb0/plexmedia"
 
+# Logfile: amc.log
+# View: cat /var/lib/deluge/.filebot/logs/amc.log
+# Excludelist: amc.txt
 filebot -script fn:amc \
   --output "$CONFIG_OUTPUT" \
   --action duplicate \
