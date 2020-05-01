@@ -44,6 +44,7 @@ options=(1.0 "Update & Clean" on
 6 "Teamviewer" off
 7 "Skype" off
 8 "Docky (Desktop app launcher)" off
+8 "Plank (Desktop app launcher)" off
 9 "Chrome" off
 10 "Thunderbird" off
 11 "Plank (Dsktop app launcher)" off
@@ -327,6 +328,13 @@ do
     # Docky
     # Desktop app launcher
     sudo apt -y install docky
+    ;;
+
+
+    8.1)
+    # Plank
+    # Desktop app launcher - don't forget to add autostart
+    sudo apt -y install plank
     ;;
     
     
