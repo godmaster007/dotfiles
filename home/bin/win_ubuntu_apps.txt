@@ -3,3 +3,4 @@ vim vim-addon-manager
 python-pygments python3-pygments
 htop
 curl
+net-tools
