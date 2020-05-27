@@ -16,7 +16,7 @@ mlocate
 python-pip
 npm
 htop
-#net-tools
+net-tools
 nmap
 #zenmap
 #ethtool
