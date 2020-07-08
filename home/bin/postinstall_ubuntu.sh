@@ -48,7 +48,7 @@ options=(1.0 "Update & Clean" on
 9 "Chrome" off
 10 "Thunderbird" off
 11 "Plank (Dsktop app launcher)" off
-12 "NA" off
+12 "lm-sensors (CPU & HD Temp)" off
 13 "NA" off
 14 "Wallpapers" off
 15 "Themes (GTK)" off
@@ -361,7 +361,10 @@ do
     
     
     12)
-    # NA
+    # lm-sensors
+    $INSTALL lm-sensors hddtemp
+    sudo sensors-detect
+    sensors
     ;;
     
     
@@ -572,9 +575,9 @@ do
     # Pip Install
     $INSTALL curl
     $INSTALL ffmpeg
-    $INSTALL python-pip
+    $INSTALL python3-pip
     # sudo pip install youtube-dl
-    sudo -H pip install --upgrade youtube-dl
+    sudo -H pip3 install --upgrade youtube-dl
     ;;
     
     30)
