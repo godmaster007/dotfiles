@@ -7,7 +7,7 @@ CLIP () {
 }
 
 
-#### .bash_aliases ####
+#### BOOTSTRAP ####
 # Display alias syntax
 alias VB='clear; clear; c ~/.bash_aliases'
 # Reload shell settings
@@ -18,7 +18,7 @@ alias DLBOOT='sudo apt -y install curl; curl -SLo bootstrap.sh git.io/fhdhf && c
 #history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 
 
-#### Git - Homeshick ####
+#### GIT - HOMESHICK ####
 # Check status
 alias CHECK='homeshick check ; homeshick cd dotfiles && git status && cd ~'
 # Download current version
@@ -37,7 +37,7 @@ PUSH () {
 }
 
 
-#### System Info ####
+#### PROCESSES ####
 # Tload - System Load Graphic
 alias sysload="tload -s 10"
 # Memory Stats
@@ -73,7 +73,7 @@ kp () {
 
 
 
-#### System Update ####
+#### UPDATE ####
 # Update & Clean plus reboot or shutdown
 alias UC='\
 sudo apt update ; \
@@ -93,18 +93,13 @@ showpkg () {
 alias INSTALL='sudo apt -y install'
 
 
-###############################################################################
-## Security
-###############################################################################
-
+#### SSH ####
 # SSH Keys (Generate) - EI(SSHKEY)
 alias SSHKEY='yes "" | ssh-keygen -t rsa -b 4096'
 # SSH Keys (Copy) - IE (ssh-copy-id -p 2022 root@76.14.134.182)
 
-###############################################################################
-## Networking
-###############################################################################
 
+#### NETWORK ####
 # Nmap - Network Mapper & Port Scanner
 alias NMAP='nmap --iflist'
 
