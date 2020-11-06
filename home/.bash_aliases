@@ -1,46 +1,32 @@
-##############################################################################
-## TESTING
-##############################################################################
-
-# Plex Server - Manually turn screen off and on
+#### TESTING ####
+# Toggle display power - Ubuntu Server Fix
 alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
-
-# Copies file contents to clipboard, does not work with windows ubuntu shell
+# Copy file contents to clipboard - does not work with win10 ubuntu shell
 CLIP () {
   xclip -sel clip < "$1"
 }
 
-###############################################################################
-## .bash_aliases
-###############################################################################
 
+#### .bash_aliases ####
 # Display alias syntax
 alias VB='clear; clear; c ~/.bash_aliases'
-
 # Reload shell settings
 alias SOURCE='. ~/.bashrc'
-
 # Download bootstrap.sh
-alias DLBOOT='sudo apt -y install curl; curl -sLo bootstrap.sh git.io/fhdhf && chmod +x bootstrap.sh'
-
+alias DLBOOT='sudo apt -y install curl; curl -SLo bootstrap.sh git.io/fhdhf && chmod +x bootstrap.sh'
 # Show most used commands
 #history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 
-###############################################################################
-## Git - Homeshick
-###############################################################################
 
+#### Git - Homeshick ####
 # Check status
 alias CHECK='homeshick check ; homeshick cd dotfiles && git status && cd ~'
-
 # Download current version
 alias PULL='homeshick pull'
-
 # Add more files to dotfiles tracking castle
 TRACK! () {
   homeshick track dotfiles "$1"
 }
-
 # Update master with local changes - IE (PUSH "Changed some stuff")
 PUSH () {
   homeshick cd dotfiles
@@ -50,35 +36,26 @@ PUSH () {
   cd ~
 }
 
-###############################################################################
-## Processes
-###############################################################################
 
+#### System Info ####
 # Tload - System Load Graphic
 alias sysload="tload -s 10"
-
 # Memory Stats
 alias meminfo='free -m -l -t'
-
 # Show top process eating memory
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
-
 # Show top process eating cpu
 alias pscpu='ps auxf | sort -nr -k 3'
 alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
-
 # GPU & Ram Details
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
-
 # Process Highlighter 1
 alias psx='ps -auxw | grep $1'
-
 # Process Highlighter 2
 psa () {
   ps aux | grep $1
 }
-
 # Kill Process with Full Name
 kp () {
   ps aux | grep $1 > /dev/null
@@ -94,10 +71,9 @@ kp () {
   return;
 }
 
-###############################################################################
-## Config
-###############################################################################
 
+
+#### System Update ####
 # Update & Clean plus reboot or shutdown
 alias UC='\
 sudo apt update ; \
@@ -108,15 +84,14 @@ sudo apt autoclean -y ; \
 sudo apt clean -y'
 alias UCR='UC ; reboot'
 alias UCS='UC ; shutdown'
-
 # View Installed Packages
 showpkg () {
   apt-cache pkgnames | grep -i "$1" | sort | less
   return;
 }
-
 # Install
 alias INSTALL='sudo apt -y install'
+
 
 ###############################################################################
 ## Security
