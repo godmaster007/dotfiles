@@ -7,7 +7,6 @@ make
 git
 gparted
 preload
-#sshfs
 dos2unix
 p7zip-full p7zip-rar
 solaar
@@ -18,15 +17,18 @@ npm
 htop
 net-tools
 nmap
+gedit gedit-plugins
+nano
+vim vim-addon-manager
+xclip
+psensor
+
+## Disabled ##
 #zenmap
 #ethtool
 #filezilla
 #putty
 #iproute2 iproute2-doc
 #chromium-browser
-gedit gedit-plugins
-nano
-vim vim-addon-manager
-xclip
 #docky
-psensor
+#sshfs
