@@ -9,9 +9,8 @@ CLIP () {
 }
 
 #### FIREWALL
-
 # Check status of sshd
-alias F2B='sudo fail2ban-client status sshd'
+alias f2b='sudo fail2ban-client status sshd'
 
 
 #### BOOTSTRAP ####
