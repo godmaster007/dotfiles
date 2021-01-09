@@ -8,6 +8,10 @@ CLIP () {
   xclip -sel clip < "$1"
 }
 
+# Display Core Temp
+alias TEMP='sensors -f'
+
+
 #### FIREWALL
 # Check status of sshd
 alias f2b='sudo fail2ban-client status sshd | less'
