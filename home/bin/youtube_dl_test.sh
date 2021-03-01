@@ -5,7 +5,12 @@
 
 
 YD1='https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-fty9pBk3fhkjN2BMF1_EDr'
-YD_Folder="cd $HOME/Music/YD1"
+
+#VM Folder using windows linux app
+YD_Folder="/mnt/c/Users/nicho/Music/YD1"
+
+# VM Folder using virtualbox
+#YD_Folder="cd $HOME/Music/YD1"
 
 $YD_Folder
   youtube-dl \
