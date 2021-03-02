@@ -1,6 +1,6 @@
 #### TESTING ####
 #Download Youtube playlist "YD1"
-alias DY='. bin/youtube_dl_test.sh'
+alias DY='. $HOME/bin/youtube_dl_test.sh'
 
 # Toggle display power - Ubuntu Server Fix
 alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
