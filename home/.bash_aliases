@@ -195,18 +195,20 @@ alias ethtool='ethtool eth1'
 # # }
 
 # # OLD CONFIGURATIONS
-# # Troubleshoot: "youtube-dl -F --verbose https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-cSmEL0MmKfx02_Y7lKxDyH"
-# YD () {
-#   youtube-dl \
-#   --download-archive downloaded.txt \
-#   --no-post-overwrites \
-#   --audio-quality 320K \
-#   --add-metadata -ciwx \
-#   --audio-format mp3 -o '%(title)s.%(ext)s' \
-#   --metadata-from-title '%(artist)s - %(title)s' \
-#   --embed-thumbnail \
-#   "$1"
-# }
+# Troubleshoot: "youtube-dl -F --verbose https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-cSmEL0MmKfx02_Y7lKxDyH"
+
+YD () {
+  youtube-dl \
+  --download-archive downloaded.txt \
+  --no-post-overwrites \
+  --audio-quality 320K \
+  --add-metadata -ciwx \
+  --audio-format mp3 -o '%(title)s.%(ext)s' \
+  --metadata-from-title '%(artist)s - %(title)s' \
+  --embed-thumbnail \
+  "$1"
+}
+
 # # Download playlist as WAV files
 # YDVM () {
 #   cd ~/Downloads/YoutubeDL
