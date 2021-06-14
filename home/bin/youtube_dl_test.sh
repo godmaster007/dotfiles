@@ -7,13 +7,13 @@
 YD1='https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-fty9pBk3fhkjN2BMF1_EDr'
 
 #VM Folder using windows linux app
-#YD_Folder="cd /mnt/c/Users/nicho/Music/YD1"
+YD_Folder="cd /mnt/c/Users/nicho/Music/YD1"
 
 #Virtual box VM Folder
 #YD_Folder="cd $HOME/Music/YD1"
 
 #Windows10 shared directory with VM
-YD_Folder="cd /media/sf_Downloads/YD1"
+#YD_Folder="cd /media/sf_Downloads/YD1"
 
 $YD_Folder
   youtube-dl \
