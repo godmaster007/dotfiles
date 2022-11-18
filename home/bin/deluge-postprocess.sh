@@ -28,12 +28,3 @@ filebot -script fn:amc \
 	ut_kind="multi" \
 	ut_title="$ARG_NAME" \
 	ut_label="$ARG_LABEL"
-
-
-
-#--log-file amc.log
-#~/.filebot/logs/amc.log
-
-#--def excludeList=amc.txt
-#~/.filebot/logs/amc.txt
-#Testing
