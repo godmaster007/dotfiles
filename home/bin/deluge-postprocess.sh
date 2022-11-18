@@ -1,15 +1,19 @@
 #!/bin/sh -xu
 
-# Input Parameters
+
+
+
+# INPUTS
 ARG_PATH="$3/$2"
 ARG_NAME="$2"
 ARG_LABEL="N/A"
 
-# Configuration
-# If this script is called by the deluge user,
-# then $HOME will NOT refer to YOUR user home,
-# but paths such as /var/lib/deluge instead
-CONFIG_OUTPUT="/media/usb0/plexmedia"
+
+
+# CONFIG
+# Script is called by deluge user, $HOME will not work.
+# Use full paths - example: /home/<username>/media.
+CONFIG_OUTPUT="/home/dopeman/Logs"
 
 # Logfile: amc.log
 # View: cat /var/lib/deluge/.filebot/logs/amc.log
