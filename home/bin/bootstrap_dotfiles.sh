@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## bootstrap_V2.sh ##
+## bootstrap_dotfiles.sh ##
 
 
 # Debug
