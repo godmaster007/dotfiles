@@ -29,17 +29,15 @@
 ## Set command variables ##
 # Depending on root admin, this assumes debian
 # If derivate, replace with yum, pacman etc.
-aptget='sudo apt-get'
-chsh='sudo chsh'
+apt='sudo apt'
 if [ `whoami` = 'root' ]; then
-    aptget='apt-get'
-    chsh='chsh'
+    apt='apt'
 fi
 
 
 ## Install required apps ##
-$aptget update
-$aptget install -y curl vim nano git xclip
+$apt update
+$apt install -y curl vim nano git xclip
 
 
 ## SSH Config ##
