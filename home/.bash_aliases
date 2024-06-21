@@ -1,4 +1,4 @@
-## TESTING ##
+#** TESTING **#
 
 #Download Youtube playlist "YD1"
 alias DY='. $HOME/bin/youtube_dl_test.sh'
