@@ -142,4 +142,21 @@ echo "Would you like to open the links for github sshkey?"
 xdg-open "https://github.com/settings/ssh/new" </dev/null >/dev/null 2>&1 & disown
 
 ## SSH Troubleshoot ##
-# ssh -vT git@github.com
+# ssh -vT git@github.com (Shows errors to help fix)
+# ssh-keygen -f "/home/dopeman/.ssh/known_hosts" -R "github.com" (delete old keys)
+
+# Fix ssh-agent 
+# eval "$(ssh-agent -s)" (Turn on ssh-agent)
+# ssh-add -l (lists private keys)
+# ssh-add -D (Delete old shit)
+# ssh-keygen -t ed25519 -C "nicholaskoron+github@gmail.com" (Create labeled key for github)
+# ssh-add ~/.ssh/id_ed25519
+#
+
+#Fix git config
+# homeshick cd dotfiles (Go into the dotfiles local repo)
+# git status (Shows if there's problems with repo)
+# git config --list --show-origin (Shows where git tries to connect to repo)
+# git remote set-url origin git@github.com:godmaster007/dotfiles.git (switch from url to ssh)
+# xclip < ~/.ssh/id_rsa.pub (Copy public key to click board or manually copy)
+# Paste in new ssh key in github.com settings

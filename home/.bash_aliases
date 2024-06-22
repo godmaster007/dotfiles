@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 #### TESTING ####
 # Fix Media Access
 alias fmedia='sudo chown -R dopeman:deluge ~/Media/wd12/ && sudo chmod -R 775 ~/Media/wd12/'
 
-=======
 ## TESTING ##
->>>>>>> cd3eb4aada21929a1ed4a11c00ea1c75b362a17e
 
 #Download Youtube playlist "YD1"
 alias DY='. $HOME/bin/youtube_dl_test.sh'
