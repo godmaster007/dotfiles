@@ -144,7 +144,7 @@ do
     fi
 
     if [ -z $git_email ]; then
-      git_email='default@gmail.com'
+      git_email='nicholaskoron+github@gmail.com'
     fi
     
     if [ -z $git_repo ]; then

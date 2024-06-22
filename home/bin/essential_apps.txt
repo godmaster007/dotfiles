@@ -1,7 +1,4 @@
 ## Essential Apps ##
-
-figlet
-toilet
 curl
 wget
 git
@@ -17,9 +14,9 @@ xclip
 psensor
 
 
-
 ## Disabled ##
-
+#figlet
+#toilet
 #gedit gedit-plugins
 #python-pip
 #npm
