@@ -89,7 +89,7 @@ echo "Your github repo is: $git_repo"
 #echo Will set the remote url origin of your repo to: git@github.com:$git_user/"$git_repo".git
 
 # Set HTTPS remote origin
-echo 'Will set the repos remote url origin to: https://www.github.com/"$git_user"/"$git_repo".git'
+echo "Will set the repos remote url origin to: https://www.github.com/$git_user/$git_repo.git"
 
 # Clone homeshick
 git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
