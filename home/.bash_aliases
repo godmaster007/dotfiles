@@ -102,6 +102,13 @@ sudo apt autoclean -y ; \
 sudo apt clean -y'
 alias UCR='UC ; reboot'
 alias UCS='UC ; shutdown'
+
+# Powerswitches
+alias reboot='sudo shutdown -r now'
+alias poweroff='sudo /sbin/poweroff'
+alias halt='sudo /sbin/halt'
+alias shutdown='sudo /sbin/shutdown -h now'
+
 # View Installed Packages
 showpkg () {
   apt-cache pkgnames | grep -i "$1" | sort | less
@@ -330,12 +337,6 @@ alias c='pygmentize -g'
 
 # Highlighting with Rows
 alias cc='pygmentize -g -O style=colorful,linenos=1'
-
-# Powerswitches
-alias reboot='sudo shutdown -r now'
-alias poweroff='sudo /sbin/poweroff'
-alias halt='sudo /sbin/halt'
-alias shutdown='sudo /sbin/shutdown -P now'
 
 # Plex Server - Manually turn screen off and on
 alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
