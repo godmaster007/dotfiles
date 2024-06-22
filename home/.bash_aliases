@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 #### TESTING ####
 # Fix Media Access
 alias fmedia='sudo chown -R dopeman:deluge ~/Media/wd12/ && sudo chmod -R 775 ~/Media/wd12/'
 
+=======
+## TESTING ##
+>>>>>>> cd3eb4aada21929a1ed4a11c00ea1c75b362a17e
 
 #Download Youtube playlist "YD1"
 alias DY='. $HOME/bin/youtube_dl_test.sh'
@@ -9,7 +13,7 @@ alias DY='. $HOME/bin/youtube_dl_test.sh'
 # Toggle display power - Ubuntu Server Fix
 alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
 
-# Copy file contents to clipboard - does not work with win10 ubuntu shell
+# Copy file contents to clipboard
 CLIP () {
   xclip -sel clip < "$1"
 }
@@ -18,23 +22,23 @@ CLIP () {
 alias TEMP='sensors -f'
 
 
-#### FIREWALL
+## Server Firewall ##
 # Check status of sshd
 alias f2b='sudo fail2ban-client status sshd | less'
 
 
-#### BOOTSTRAP ####
+## Bootstrap ##
 # Display alias syntax
 alias VB='clear; clear; c ~/.bash_aliases'
 # Reload shell settings
 alias SOURCE='. ~/.bashrc'
 # Download bootstrap.sh
-alias DLBOOT='sudo apt -y install curl; curl -SLo bootstrap.sh git.io/fhdhf && chmod +x bootstrap.sh'
+alias DLBOOT='sudo apt -y install curl && curl -sLo bootstrap.sh git.io/fhdhf && chmod +x bootstrap.sh'
 # Show most used commands
 #history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 
 
-#### GIT - HOMESHICK ####
+## Git Commands with Homeshick ##
 # Check status
 alias CHECK='homeshick check ; homeshick cd dotfiles && git status && cd ~'
 # Download current version
@@ -43,7 +47,8 @@ alias PULL='homeshick pull'
 TRACK! () {
   homeshick track dotfiles "$1"
 }
-# Update master with local changes - IE (PUSH "Changed some stuff")
+# Update master with local changes
+# example: (PUSH "Updated Stuff")
 PUSH () {
   homeshick cd dotfiles
   git add .
@@ -53,8 +58,8 @@ PUSH () {
 }
 
 
-#### PROCESSES ####
-# Tload - System Load Graphic
+## System Management ##
+# System Load Graphic
 alias sysload="tload -s 10"
 # Memory Stats
 alias meminfo='free -m -l -t'
@@ -89,7 +94,7 @@ kp () {
 
 
 
-#### UPDATE ####
+## System Updates ##
 # Update & Clean plus reboot or shutdown
 alias UC='\
 sudo apt update ; \
@@ -109,49 +114,36 @@ showpkg () {
 alias INSTALL='sudo apt -y install'
 
 
-#### SSH ####
+## SSH Config ##
 # SSH Keys (Generate) - EI(SSHKEY)
 alias SSHKEY='yes "" | ssh-keygen -t rsa -b 4096'
 # SSH Keys (Copy) - IE (ssh-copy-id -p 2022 root@76.14.134.182)
 
 
-#### NETWORK ####
+## Networking ##
 # Nmap - Network Mapper & Port Scanner
 alias NMAP='nmap --iflist'
-
-# IP Tools - (https://www.poftut.com/linux-ss-command-tutorial-with-examples)
+# IP Tools (https://www.poftut.com/linux-ss-command-tutorial-with-examples)
 alias iproute="ip route; ip -s link; ip maddr; ss -l; ss -t -a"
-
-# Ping - Echo Requets to Network Hosts
+# Ping - Echo Request to Network Hosts
 alias ping='ping -c 5'
-
-# IPs - Private & Public
+# IP Details: Private & Public
 alias IP='echo "Private IP" && ifconfig | sed -En "s/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p" && echo "Public IP" && dig +short myip.opendns.com @resolver1.opendns.com'
-
-# Appache - View http server log
+# Apache - View http server log
 alias phplog="tail -f /var/log/apache2/error_log"
-
 # BSD DNS Traffic Monitor
 alias dnstop='dnstop -l 5 eth1'
-
 # Network Traffic Monitor
 alias vnstat='vnstat -i eth1'
-
 # Displays Bandwidth Usage by Host
 alias iftop='iftop -i eth1'
-
 # Dumps Traffic on Networks
 alias tcpdump='tcpdump -i eth1'
-
 # Query or control network driver and hardware settings
 alias ethtool='ethtool eth1'
 
 
-# ###############################################################################
-# ## Youtube-dl
-# ###############################################################################
-
-# # NEW DYNAMIC CONFIG TESTING
+## Youtube-dl ##
 
 # PL1='https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-fdN6fcVne88peQ97qjGW-4'
 # PL2='https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-co5UkkjbMf8R_KWnM_KFBz'
@@ -253,19 +245,15 @@ YD () {
 #   cd ~
 # }
 
-###############################################################################
-## Dropbox-Uploader
-###############################################################################
 
-# Commandline functionality
+## Dropbox-Uploader ##
+# Command-Line functionality
 # Source (https://github.com/andreafabrizi/Dropbox-Uploader)
-# IE - Upload aliases to dropbox root (DBU upload ~/.bash_aliases /)
+# EX: Upload aliases to dropbox root (DBU upload ~/.bash_aliases /)
 alias DBU='./Dropbox-Uploader/dropbox_uploader.sh'
 
-###############################################################################
-## Password Generator
-###############################################################################
 
+## Password Generator ##
 function randpassw(){
   if [ -z $1 ]; then
     MAXSIZE=10
@@ -288,51 +276,40 @@ function randpassw(){
   echo
 }
 
-###############################################################################
-## File Management
-###############################################################################
 
+## File Management ##
 # Drive Details
 alias DISK!="sudo lshw -C disk;uname -a"
-
-# Format with zeros - IE (shred -vzn 0 /dev/sda)
-
+# Format with zeros, change 0 to 1 to shred first
+# EX: shred -vzn 0 /dev/sda
 # Tree view
 function tree(){
   pwd
   ls -R | grep ":$" |   \
   sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 }
-
 # Directory Contents
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
-
 # View Hidden Files
 alias l.='ls -d .* --color=auto'
 alias lsh="ls -ld .??*"
-
 # Disk Usage
 alias df="df -H"
 alias du="du -ch"
 alias du1='du -d 1'
-
 # RSYNC - Copy with Progress & Resume
 alias rsyncp="rsync --progress -ravz"
-
 # Move files and folders recursive, preserve perm and owner
 alias moveff="cd /source/directory; tar cf - . | tar xf - -C /destination/directory"
-
 # WGET - Continous Web Downloader
 alias wget="wget -c"
 
-###############################################################################
-## Settings
-###############################################################################
 
+## Settings ##
 # Short Cuts
 alias h="clear; c ~/.bash_history"
 alias j="jobs -l"
@@ -366,10 +343,8 @@ alias shutdown='sudo /sbin/shutdown -P now'
 # Plex Server - Manually turn screen off and on
 alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
 
-###############################################################################
-## Extractor
-###############################################################################
 
+## File Extractor ##
 function extract {
  if [ -z "$1" ]; then
     # display usage if no parameters given
@@ -405,4 +380,3 @@ function extract {
     done
 fi
 }
-
