@@ -12,11 +12,10 @@ nmap
 vim vim-addon-manager
 xclip
 psensor
+toilet
 
 
 ## Disabled ##
-#figlet
-#toilet
 #gedit gedit-plugins
 #python-pip
 #npm
