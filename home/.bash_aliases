@@ -24,6 +24,29 @@ alias TEMP='sensors -f'
 alias f2b='sudo fail2ban-client status sshd | less'
 
 
+## Add User ##
+# Add user: (useradd -m username)
+# -m creates a home directory for the user.
+# Set Password: (passwd username)
+# Set user group to sudo: (usermod -a -G sudo username)
+# -a option to add and ‘-G sudo’ means to add the user to the sudo group.
+# chsh command is used to change the login shell for a user: (chsh -s /bin/bash username)
+
+# NewUser () {
+#   echo "Hello, "$USER".  This script will add a new user."
+#   # Username
+#   echo -n "Enter your new Username and press [ENTER]: "
+#   read new_user
+#   if [ `whoami` = 'root' ]; then
+#     apt='apt'
+# fi
+#   useradd -m $new_user
+#   passwd $new_user
+#   usermod -a -G sudo $new_user
+#   chsh -s /bin/bash $new_user
+# }
+
+
 ## Bootstrap ##
 # Display alias syntax
 alias VB='clear; clear; c ~/.bash_aliases'
