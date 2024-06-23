@@ -25,12 +25,13 @@ alias f2b='sudo fail2ban-client status sshd | less'
 
 
 ## Add User ##
-# Add user: (useradd -m username)
-# -m creates a home directory for the user.
-# Set Password: (passwd username)
-# Set user group to sudo: (usermod -a -G sudo username)
-# -a option to add and ‘-G sudo’ means to add the user to the sudo group.
-# chsh command is used to change the login shell for a user: (chsh -s /bin/bash username)
+# useradd -m username
+# passwd username
+# usermod -a -G username
+# chsh -s /bin/bash username
+# Details: -m creates home directory, passwd sets password
+# -a sets user group to sudo, -G adds user to sudo group
+# chsh changes login shell for user
 
 # NewUser () {
 #   echo "Hello, "$USER".  This script will add a new user."
