@@ -202,6 +202,7 @@ YD () {
   --metadata-from-title '%(artist)s - %(title)s' \
   --embed-thumbnail \
   "$1"
+  cd ~
 }
 
 ## Download playlist as WAV files
