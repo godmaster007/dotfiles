@@ -627,8 +627,11 @@ do
     35)
     # Kali 2018 (Custom Tweaks)
     # Auto Login GNOME Desktop
-    sed -i 's/#AutomaticLoginEnable = true/AutomaticLoginEnable = true/g' /etc/gdm3/daemon.conf
-    sed -i 's/#AutomaticLogin = root/AutomaticLogin = root/g' /etc/gdm3/daemon.conf
+    #sed -i 's/#AutomaticLoginEnable = true/AutomaticLoginEnable = true/g' /etc/gdm3/daemon.conf
+    #sed -i 's/#AutomaticLogin = root/AutomaticLogin = root/g' /etc/gdm3/daemon.conf
+    # Kali 2024.2 Autologin Xfce
+    sed -i 's/#autologin-user=/autologin-user=$USER/g' /etc/lightdm/lightdm.conf
+    sed -i 's/#autologin-user-timeout=0/autologin-user-timeout=0/g' /etc/lightdm/lightdm.conf
     ;;
     
     36)
