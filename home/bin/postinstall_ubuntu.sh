@@ -1,34 +1,21 @@
 #!/bin/bash
 
-##############
-## Debuging ##
-##############
+
+## DEBUG ##
 #set -x
 #set -e
 set -v
 
-######################
+
 ## Define Variables ##
-######################
-# Shows which flavor of ubuntu is installed
-FLAVOR=`echo $XDG_SESSION_DESKTOP`
-# Shortcut for system maintence comands, change "apt" to "apt-get" if needed
 INSTALL="sudo apt -y install"
-post_dl='https://git.io/fjKSF'
+FLAVOR=`echo $XDG_SESSION_DESKTOP`
 
-##################
-## Define Paths ##
-##################
-#
 
-###################################
 ## Configure GUI Install Options ##
-###################################
-# Install Dialog
 $INSTALL dialog
-# Not sure what this command is doing besides defining the heading
 cmd=(dialog --separate-output --checklist "Select Software to Install:" 22 76 16)
-# Option can be set as default with "on"
+## Set options as default with "on" ##
 options=(1.0 "Update & Clean" on
 1.1 "SSH-KEY (Generate)" off
 1.2 "SSH-KEY (Paste pub key into Github)" off
