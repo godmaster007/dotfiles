@@ -1,21 +1,19 @@
 #!/bin/bash
 
-
-## DEBUG ##
+### DEBUG
 #set -x
 #set -e
 set -v
 
-
-## Define Variables ##
+### Define Variables
 INSTALL="sudo apt -y install"
 FLAVOR=`echo $XDG_SESSION_DESKTOP`
 
-
-## Configure GUI Install Options ##
+### Configure GUI
 $INSTALL dialog
 cmd=(dialog --separate-output --checklist "Select Software to Install:" 22 76 16)
-## Set options as default with "on" ##
+
+### Set options as default with "on"
 options=(1.0 "Update & Clean" on
 1.1 "SSH-KEY (Generate)" off
 1.2 "SSH-KEY (Paste pub key into Github)" off
