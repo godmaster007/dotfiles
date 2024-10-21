@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 ### DEBUG
 #set -x
 #set -e
@@ -73,7 +74,7 @@ do
   case $choice in
     
     1.0)
-    # Update & Clean
+    ### Update & Clean
     sudo apt -y update
     sudo apt -y upgrade
     sudo apt -y dist-upgrade
@@ -313,7 +314,7 @@ do
     
     
     8.0)
-    # Docky Install - Desktop Launcher
+    ### Docky Install - App Launcher
     sudo apt -y install docky
     ;;
 
@@ -326,49 +327,47 @@ do
     
     
     9)
-    ### Chrome Install
+    ### Chrome Install - Browser
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
     #echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
     sudo apt update
-    $INSTALL google-chrome-stable
+    sudo apt install -y google-chrome-stable
     ;;
     
     
     10)
     ### Thunderbird Install
-    $INSTALL thunderbird
+    sudo apt install -y thunderbird
     ;;
     
     
     11)
-    # Plank (Desktop app launcher)
+    ### Plank Install - App Launcher
     sudo apt -y install plank
     ;;
     
     
     12)
-    # lm-sensors
-    $INSTALL lm-sensors hddtemp
+    ### lm-sensors Install - Tempature Sensor
+    sudo apt install -y lm-sensors hddtemp
     sudo sensors-detect
     sensors
     ;;
     
     
     13)
-    # NA
+    ### NA
     ;;
     
     
     14)
-    # Wallpapers
-    # Ubuntu Collection
-    $INSTALL \
+    ### Wallpapers Download - Ubuntu Collection
+    sudo apt install -y \
     ubuntu-wallpapers-* \
     edgy-wallpapers \
     feisty-wallpapers \
     gutsy-wallpapers
-    #
     # Dropbox Collection need to fix i think
     #curl "https://www.dropbox.com/sh/yqoksuzhflnyems/AACgHGrBzgATmExaJsB8zR5ma?dl=1" -O -J -L && \
     #sudo unzip Backgrounds_Dropbox.zip -d /usr/share/xfce4/backdrops/
@@ -393,31 +392,26 @@ do
     
     
     16)
-    # Virtualbox (Guest)
-    # Insert guest additions before installing
-    #sudo apt update
-    #sudo apt -y upgrade
-    #sudo apt -y dist-upgrade
-    $INSTALL dkms build-essential
+    ### Virtualbox Guest Install - Insert image before installing
+    sudo apt install -y dkms build-essential
     sudo mount -r /dev/sr0 /media
     sudo sh /media/VBoxLinuxAdditions.run
     sudo adduser $USER vboxsf
-    sudo reboot now
+    #sudo reboot now
     ;;
     
     
     17)
-    # Virtualbox (Host)
-    #Add repo key
+    ### Virtualbox Host Install - VM Software
+    #Add Repo Key
     wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
     wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
-    #Add virtualbox repo
+    #Add VBox Repo
     sudo add-apt-repository "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib"
     #sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" >> /etc/apt/sources.list.d/virtualbox.list'
     sudo apt update
-    $INSTALL dkms gcc make linux-headers-$(uname -r)
-    #sudo apt update
-    $INSTALL virtualbox-6.*
+    sudo apt install -y dkms gcc make linux-headers-$(uname -r)
+    sudo apt install -y virtualbox-7.*
     sudo usermod -a -G vboxusers $USER
     ;;
     
@@ -509,17 +503,15 @@ do
     ;;
     
     26)
-    # Atom
-    # Text Editor
+    ### Atom Install - Text Editor
     curl -sL https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
     sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
     sudo apt update
-    $INSTALL atom
+    sudo apt install -y atom
     ;;
     
     27)
-    # Wireshark
-    # Network Monitor
+    ### Wireshark Install - Network Monitor
     echo wireshark-common wireshark-common/install-setuid boolean true | sudo debconf-set-selections
     sudo DEBIAN_FRONTEND=noninteractive apt -y install wireshark
     sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure wireshark-common
@@ -527,50 +519,34 @@ do
     ;;
     
     28)
-    # ClamAV (Install)
-    # Virus Protection
-    # Troubleshooting, first stop deamon then rerun update
-    # sudo systemctl stop clamav-freshclam.service
-    # sudo freshclam
-    # OR
-    # sudo pkill -15 -x freshclam
-    # sudo freshclam
-    # OR
-    # sudo /etc/init.d/clamav-freshclam stop
-    # sudo freshclam
-    # sudo /etc/init.d/clamav-freshclam start
-    $INSTALL clamav clamav-daemon clamtk
+    ### ClamAV Install - Virus Protection
+    sudo apt install -y clamav clamav-daemon clamtk
     sudo freshclam
     sudo /etc/init.d/clamav-daemon start
     ;;
     
     
     28.1)
-    # ClamAV (Uninstall)
+    ### ClamAV Uninstall
     sudo apt-get -y remove --purge clamav*
     ;;
     
     
     29)
-    # Youtube-dl
-    # Web downloader
-    # Initially, used the alternative install
-    # Now changed to pip install method so it's easier to update
-    # Alternative Install
+    ### Youtube-dl Install - Web Downloader
     # sudo curl -L https://yt-dl.org/latest/youtube-dl -o /usr/local/bin/youtube-dl
     # sudo chmod a+rx /usr/local/bin/youtube-dl
-    # Pip Install
-    $INSTALL curl
-    $INSTALL ffmpeg
-    $INSTALL python3-pip
-    # sudo pip install youtube-dl
+    # Pip Install - youtube-dl
+    sudo apt install -y \
+    curl \
+    ffmpeg \
+    python3-pip
     sudo -H pip3 install --upgrade youtube-dl
     ;;
     
     30)
-    # Most
-    # Manpage Highlighting
-    $INSTALL most
+    ### Most Install - Manpage Highlighting
+    sudo apt install -y most
     if grep "export PAGER='most'" ~/.bashrc
     then
       echo "Most already added to ~/.bashrc"
@@ -582,8 +558,8 @@ do
     ;;
     
     31)
-    # Ubuntu 18.04 (Custom Tweaks)
-    $INSTALL \
+    ### Ubuntu 18.04 - Custom Tweaks
+    sudo apt install \
     gnome-tweak-tool \
     gnome-shell-extensions \
     dconf-editor;
@@ -591,76 +567,67 @@ do
     ;;
     
     32)
-    # Geany
-    # IDE
-    $INSTALL geany geany-plugin-addons geany-plugin-treebrowser
+    ### Geany Install - IDE
+    sudo apt install -y geany geany-plugin-addons geany-plugin-treebrowser
     ;;
     
     33)
-    # Brackets
-    # IDE
+    ### Brackets Install - IDE
     sudo add-apt-repository ppa:webupd8team/brackets -y
     sudo apt update
-    $INSTALL brackets
+    sudo apt install -y brackets
     ;;
     
     34)
-    # Bluefish
-    # IDE
-    $INSTALL bluefish bluefish-plugins
+    ### Bluefish Install - IDE
+    sudo apt install -y bluefish bluefish-plugins
     ;;
     
     35)
-    # Kali 2018 (Custom Tweaks)
-    # Auto Login GNOME Desktop
+    # Kali - Gnome Autologin
     #sed -i 's/#AutomaticLoginEnable = true/AutomaticLoginEnable = true/g' /etc/gdm3/daemon.conf
     #sed -i 's/#AutomaticLogin = root/AutomaticLogin = root/g' /etc/gdm3/daemon.conf
-    # Kali 2024.2 Autologin Xfce
-    sed -i 's/#autologin-user=/autologin-user=$USER/g' /etc/lightdm/lightdm.conf
-    sed -i 's/#autologin-user-timeout=0/autologin-user-timeout=0/g' /etc/lightdm/lightdm.conf
     ;;
     
     36)
-    # XFCE4
-    # xfce terminal, has more functionality than basic lubuntu
-    # Enable "Dropdown Terminal" or make a shortcut for it
-    $INSTALL xfce4-terminal
+    # Xfce Terminal Install - Enable dropdown terminal shortcut
+    sudo apt install xfce4-terminal
     ;;
     
     37)
-    # Slack (Team Collaboration)
-    sudo snap install slack --classic
+    ### Brave Install - Browser
+    sudo apt update && sudo apt install -y apt-transport-https curl
+    sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+    sudo apt updated
+    sudo apt install -y brave-browser
     ;;
     
     38)
-    # Rootcheck
-    # Add to main script
-    aptget='sudo apt-get'
-    if [ `whoami` = 'root' ]; then
-      aptget='apt-get'
-    fi
+    ### Rootcheck - Add to main script?
+    #aptget='sudo apt'
+    #if [ `whoami` = 'root' ]; then
+    #  aptget='apt'
+    #fi
     ;;
     
     39)
-    # Vtop
-    # System Monitor
-    # Bit heavy for a VM depending which base distro and dependencies
+    ### Vtop Install - System Monitor (To heavy for vm?)
     sudo npm -y install -g vtop
     ;;
     
     40)
-    # Libre Office 6.0
-    # Office Suite
+    ### Libre Office Install - Office Suite
     sudo add-apt-repository ppa:libreoffice/ppa -y
     sudo apt update
-    $INSTALL libreoffice
+    sudo apt install libreoffice
     ;;
 
     41)
-    # Kali (XFCE) Enable Autologin
-    # uncomment and add root to autologin settings
+    ### Kali 2024.2 - Enable XFCE Autologin
+    #sed -i 's/#autologin-user=/autologin-user=$USER/g' /etc/lightdm/lightdm.conf
+    #sed -i 's/#autologin-user-timeout=0/autologin-user-timeout=0/g' /etc/lightdm/lightdm.conf
     sed -i 's/#autologin-user=/autologin-user=root/g' /etc/lightdm/lightdm.conf
-    # change syntax in autologin config
     sed -i 's/!= root quiet_success/!= anything quiet_success/g' /etc/pam.d/lightdm-autologin
     ;;
     
