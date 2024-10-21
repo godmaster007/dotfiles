@@ -106,23 +106,25 @@ do
     
     
     1.3)
-    # Homeshick - Initial Install
-    # Github and SSH config
-    echo "Hello, "$USER".  This script will configure your Github and SSH config."
+    ### Homeshick - Initial Install
     
+    ## Github and SSH Config
+    
+    ## Define Variables
+    
+    echo "Hello, "$USER".  This script will configure your Github and SSH config."
     # Username
     echo -n "Enter your Github Username (ex: gituser1234) and press [ENTER]: "
     read git_user
-    
     # Email
     echo -n "Enter your Github Email (ex: default@gmail.com) and press [ENTER]: "
     read git_email
-    
     # Repo
     echo -n "Enter your Github Repo (ex: dotfiles) and press [ENTER]: "
     read git_repo
     
-    # If user doesn't answer variable questions the default is used
+    ## Default Variables
+    
     # -z (has length 0)
     if [ -z $git_user ]; then
       git_user='godmaster007'
@@ -136,39 +138,44 @@ do
       git_repo='dotfiles'
     fi
 
-    echo "#### Your Github variables are ####
-     Username: $git_user
-     Email: $git_email
-     Reponame: $git_repo"
-    
-    echo "Remote URL origin:\n
-    https://www.github.com/"$git_user"/"$git_repo".git"
-
     git_URL="https://www.github.com/"$git_user"/"$git_repo".git"
+    
+    echo "Your Github variables are:
+    Username: $git_user
+    Email: $git_email
+    Reponame: $git_repo
+    Remote URL Origin: $git_URL"
+    
+    
+    # Remote URL origin: "https://www.github.com/"$git_user"/"$git_repo".git"
+    # Repo remote url origin SSH: git@github.com:$git_user/"$git_repo".git
+    # Repo remote url origin HTTPS:  https://www.github.com/"$git_user"/"$git_repo".git
 
-    #Repo remote url origin SSH: git@github.com:$git_user/"$git_repo".git
-    #Repo remote url origin HTTPS:  https://www.github.com/"$git_user"/"$git_repo".git
 
-    # Clone homeshick
+    ### Clone homeshick
     git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
 
-    # Add homeshick to .bashrc
+
+    ### Add homeshick to .bashrc
     printf '\n# Source
     if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
       source "$HOME/.homesick/repos/homeshick/homeshick.sh"
     fi' >> $HOME/.bashrc
     
-    # # Add homeshick to .bashrc, enable auto completion and auto refresh
+    
+    # ### Add homeshick to .bashrc, enable auto completion and auto refresh
     # printf '\n# Source
     # if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
     #   source "$HOME/.homesick/repos/homeshick/homeshick.sh"
     #   source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
     # fi' >> $HOME/.bashrc
     
-    # Enable Auto Refresh
+    
+    ### Enable Auto Refresh
     printf '\n# Auto Refresh
     homeshick refresh -q
     \n' >> $HOME/.bashrc
+    
     
     # # Clone private dotfiles repo
     # if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
@@ -183,7 +190,7 @@ do
     # fi
 
 
-    # Homeshick (HTTPS batch clone dotfiles to new machine)
+    ### Homeshick (HTTPS batch clone dotfiles to new machine)
     # "--batch" bypasses user input questions like yes/no
     # Cloning from the HTTPS link doesn't require SSH keys to be configured
     #homeshick --batch clone https://github.com/"$git_user"/"$git_repo".git
@@ -192,7 +199,8 @@ do
     source $HOME/.bashrc
     #source $HOME/.homesick/repos/homeshick/homeshick.sh
     
-    # homeshick cd dotfiles
+    
+    ### Homeshick - Setup git config
     cd $HOME/.homesick/repos/dotfiles
     git config --global user.email "$git_email"
     git config --global user.name "$git_user"
@@ -203,7 +211,7 @@ do
     
     
     1.4)
-    # Homeshick (HTTPS batch clone dotfiles to new machine)
+    ### Homeshick (HTTPS batch clone dotfiles to new machine)
     # "--batch" bypasses user input questions like yes/no
     # Cloning from the HTTPS link doesn't require SSH keys to be configured
     homeshick --batch clone https://github.com/"$git_user"/"$git_repo".git
@@ -214,13 +222,13 @@ do
     
     
     1.7)
-    # Repositories
-    # Add Canonical_Partners
+    ### Repositories - Add Canonical_Partners
     sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
     ;;
     
+    
     1.8)
-    # Disable Error Reporting (Remove Apport)
+    ### Disable Error Reporting - Remove Apport
     if grep "enabled=0" /etc/default/apport
     then
       echo "Apport Error reporting already disabled"
@@ -233,8 +241,7 @@ do
     
     
     1.9)
-    # Edit Grub (Add nomodeset)
-    # Workaround for nvidia graphics drivers causing the bootup to fail
+    ### Edit Grub - Add nomodeset (nvidia graphics drivers causing the bootup to fail)
     sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash nomodeset"/g' /etc/default/grub
     sudo update-grub
     echo "DON'T FORGET TO REBOOT"
@@ -242,8 +249,7 @@ do
     
     
     2.0)
-        # Windows 10 Ubuntu Apps (non-gui)
-    # Installs a list of essential linux apps
+    ### Ubuntu Essential Apps Install - Windows 10 non-gui
     for line in $(cat $HOME/bin/win_ubuntu_apps.txt); do
       sudo apt -y install $line
       if [[ ! $? -eq 0 ]]; then
@@ -254,8 +260,7 @@ do
     
     
     3.0)
-    # Essential Apps
-    # Installs a list of essential linux apps
+    ### Ubuntu Essential Apps Install - installs from list
     for line in $(cat $HOME/bin/essential_apps.txt); do
       sudo apt -y install $line
       if [[ ! $? -eq 0 ]]; then
@@ -266,7 +271,7 @@ do
     
     
     4)
-    # Media
+    ### Media Apps Install
     sudo DEBIAN_FRONTEND=noninteractive apt -y install libdvd-pkg
     sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure libdvd-pkg
     $INSTALL \
@@ -274,12 +279,11 @@ do
     libavcodec-extra \
     vlc \
     gimp gimp-data gimp-plugin-registry gimp-data-extras \
-    shutter
     ;;
     
     
     5)
-    # Restricted Extras
+    ### Restricted Extras Install
     echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
     $INSTALL ttf-mscorefonts-installer
     echo ttf-mscorefonts-installer msttcorefonts/present-mscorefonts-eula note | sudo debconf-set-selections
@@ -288,8 +292,7 @@ do
     
     
     6)
-    # Teamviewer
-    # Screen Sharing & Remote Login
+    ### Teamviewer Install
     wget -q -O - https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo apt-key add -
     sudo sh -c 'echo "deb http://linux.teamviewer.com/deb stable main" >> /etc/apt/sources.list.d/teamviewer.list'
     sudo sh -c 'echo "deb http://linux.teamviewer.com/deb preview main" >> /etc/apt/sources.list.d/teamviewer.list'
@@ -299,33 +302,31 @@ do
     
     
     7)
-    # Skype
-    # Download then install skype for linux directly from microsoft
-    #sudo snap install skype --classic
+    ### Skype Install - Non repo direct download from microsoft
     wget https://repo.skype.com/latest/skypeforlinux-64.deb
     sudo dpkg -i skypeforlinux-64.deb
     sudo apt install -f -y
     rm -rf skypeforlinux-64.deb
+    ### Snap Install
+    #sudo snap install skype --classic
     ;;
     
     
     8.0)
-    # Docky
-    # Desktop app launcher
+    # Docky Install - Desktop Launcher
     sudo apt -y install docky
     ;;
 
 
     8.1)
-    # Plank
-    # Desktop app launcher - don't forget to add autostart
-    # Either manually add or create config file ".config/autostart/plank.desktop"
+    ### Plank Install - Desktop Launcher
     sudo apt -y install plank
+    #Autostart Config - Create ".config/autostart/plank.desktop"
     ;;
     
     
     9)
-    # Chrome
+    ### Chrome Install
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
     #echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
@@ -335,7 +336,7 @@ do
     
     
     10)
-    # Thunderbird
+    ### Thunderbird Install
     $INSTALL thunderbird
     ;;
     
