@@ -61,7 +61,7 @@ options=(1.0 "Update & Clean" on
 35 "Kali 2018 (Custom Tweaks)" off
 36 "Xfce4 Terminal - Dropdown" off
 37 "Brave - Browser" off
-38 "na" off
+38 "ddgr - DuckDuckGo from terminal" off
 39 "Vtop - Sys Monitor" off
 40 "Libreoffice" off
 41 "Kali Xfce - Enable Autologin" off)
@@ -604,11 +604,11 @@ do
     ;;
     
     38)
-    ### Rootcheck - Add to main script?
-    #aptget='sudo apt'
-    #if [ `whoami` = 'root' ]; then
-    #  aptget='apt'
-    #fi
+    ### ddgr Install - DuckDuckGo Command Line Search
+    wget https://github.com/jarun/ddgr/archive/refs/tags/v2.2.zip
+	unzip v2.2.zip
+	cd ddgr-2.2/
+	sudo make install
     ;;
     
     39)
