@@ -59,12 +59,12 @@ options=(1.0 "Update & Clean" on
 33 "Brackets (IDE)" off
 34 "Bluefish (IDE)" off
 35 "Kali 2018 (Custom Tweaks)" off
-36 "Xfce4 (Dropdown Terminal)" off
-37 "Slack (Team Collaboration)" off
+36 "Xfce4 Terminal - Dropdown" off
+37 "Brave - Browser" off
 38 "na" off
-39 "Vtop (System Monitor)" off
+39 "Vtop - Sys Monitor" off
 40 "Libreoffice" off
-41 "Kali (XFCE) Enable Autologin" off)
+41 "Kali Xfce - Enable Autologin" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
