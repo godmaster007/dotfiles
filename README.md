@@ -1,3 +1,3 @@
-# dotfiles
+# Dotfiles
 
-Sync linux configuration settings.
+Sync linux configuration settings
