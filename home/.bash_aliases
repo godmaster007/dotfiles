@@ -1,3 +1,5 @@
+##TESTFROMCASEY#
+
 #### TESTING ####
 # Fix Media Access
 alias fmedia='sudo chown -R dopeman:deluge ~/Media/wd12/ && sudo chmod -R 775 ~/Media/wd12/'
@@ -217,8 +219,6 @@ YDW () {
   --metadata-from-title '%(artist)s - %(title)s' \
   "$1"
   cd ~
-<<<<<<< HEAD
-=======
 }
 
 
@@ -250,7 +250,6 @@ function randpassw(){
     ((pwd_len++))
   done
   echo
->>>>>>> 3df456b3d3a43f12c5f1e93bbccefa19bcd1a623
 }
 
 
