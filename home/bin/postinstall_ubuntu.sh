@@ -1,34 +1,20 @@
 #!/bin/bash
 
-##############
-## Debuging ##
-##############
+
+### DEBUG
 #set -x
 #set -e
 set -v
 
-######################
-## Define Variables ##
-######################
-# Shows which flavor of ubuntu is installed
-FLAVOR=`echo $XDG_SESSION_DESKTOP`
-# Shortcut for system maintence comands, change "apt" to "apt-get" if needed
+### Define Variables
 INSTALL="sudo apt -y install"
-post_dl='https://git.io/fjKSF'
+FLAVOR=`echo $XDG_SESSION_DESKTOP`
 
-##################
-## Define Paths ##
-##################
-#
-
-###################################
-## Configure GUI Install Options ##
-###################################
-# Install Dialog
+### Configure GUI
 $INSTALL dialog
-# Not sure what this command is doing besides defining the heading
 cmd=(dialog --separate-output --checklist "Select Software to Install:" 22 76 16)
-# Option can be set as default with "on"
+
+### Set options as default with "on"
 options=(1.0 "Update & Clean" on
 1.1 "SSH-KEY (Generate)" off
 1.2 "SSH-KEY (Paste pub key into Github)" off
@@ -73,12 +59,12 @@ options=(1.0 "Update & Clean" on
 33 "Brackets (IDE)" off
 34 "Bluefish (IDE)" off
 35 "Kali 2018 (Custom Tweaks)" off
-36 "Xfce4 (Dropdown Terminal)" off
-37 "Slack (Team Collaboration)" off
-38 "na" off
-39 "Vtop (System Monitor)" off
+36 "Xfce4 Terminal - Dropdown" off
+37 "Brave - Browser" off
+38 "ddgr - DuckDuckGo from terminal" off
+39 "Vtop - Sys Monitor" off
 40 "Libreoffice" off
-41 "Kali (XFCE) Enable Autologin" off)
+41 "Kali Xfce - Enable Autologin" off)
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -88,7 +74,7 @@ do
   case $choice in
     
     1.0)
-    # Update & Clean
+    ### Update & Clean
     sudo apt -y update
     sudo apt -y upgrade
     sudo apt -y dist-upgrade
@@ -121,23 +107,25 @@ do
     
     
     1.3)
-    # Homeshick - Initial Install
-    # Github and SSH config
-    echo "Hello, "$USER".  This script will configure your Github and SSH config."
+    ### Homeshick - Initial Install
     
+    ## Github and SSH Config
+    
+    ## Define Variables
+    
+    echo "Hello, "$USER".  This script will configure your Github and SSH config."
     # Username
     echo -n "Enter your Github Username (ex: gituser1234) and press [ENTER]: "
     read git_user
-    
     # Email
     echo -n "Enter your Github Email (ex: default@gmail.com) and press [ENTER]: "
     read git_email
-    
     # Repo
     echo -n "Enter your Github Repo (ex: dotfiles) and press [ENTER]: "
     read git_repo
     
-    # If user doesn't answer variable questions the default is used
+    ## Default Variables
+    
     # -z (has length 0)
     if [ -z $git_user ]; then
       git_user='godmaster007'
@@ -151,39 +139,44 @@ do
       git_repo='dotfiles'
     fi
 
-    echo "#### Your Github variables are ####
-     Username: $git_user
-     Email: $git_email
-     Reponame: $git_repo"
-    
-    echo "Remote URL origin:\n
-    https://www.github.com/"$git_user"/"$git_repo".git"
-
     git_URL="https://www.github.com/"$git_user"/"$git_repo".git"
+    
+    echo "Your Github variables are:
+    Username: $git_user
+    Email: $git_email
+    Reponame: $git_repo
+    Remote URL Origin: $git_URL"
+    
+    
+    # Remote URL origin: "https://www.github.com/"$git_user"/"$git_repo".git"
+    # Repo remote url origin SSH: git@github.com:$git_user/"$git_repo".git
+    # Repo remote url origin HTTPS:  https://www.github.com/"$git_user"/"$git_repo".git
 
-    #Repo remote url origin SSH: git@github.com:$git_user/"$git_repo".git
-    #Repo remote url origin HTTPS:  https://www.github.com/"$git_user"/"$git_repo".git
 
-    # Clone homeshick
+    ### Clone homeshick
     git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
 
-    # Add homeshick to .bashrc
+
+    ### Add homeshick to .bashrc
     printf '\n# Source
     if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
       source "$HOME/.homesick/repos/homeshick/homeshick.sh"
     fi' >> $HOME/.bashrc
     
-    # # Add homeshick to .bashrc, enable auto completion and auto refresh
+    
+    # ### Add homeshick to .bashrc, enable auto completion and auto refresh
     # printf '\n# Source
     # if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
     #   source "$HOME/.homesick/repos/homeshick/homeshick.sh"
     #   source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
     # fi' >> $HOME/.bashrc
     
-    # Enable Auto Refresh
+    
+    ### Enable Auto Refresh
     printf '\n# Auto Refresh
     homeshick refresh -q
     \n' >> $HOME/.bashrc
+    
     
     # # Clone private dotfiles repo
     # if [[ ! -f $HOME/.homesick/repos/homeshick/homeshick.sh ]]; then
@@ -198,7 +191,7 @@ do
     # fi
 
 
-    # Homeshick (HTTPS batch clone dotfiles to new machine)
+    ### Homeshick (HTTPS batch clone dotfiles to new machine)
     # "--batch" bypasses user input questions like yes/no
     # Cloning from the HTTPS link doesn't require SSH keys to be configured
     #homeshick --batch clone https://github.com/"$git_user"/"$git_repo".git
@@ -207,7 +200,8 @@ do
     source $HOME/.bashrc
     #source $HOME/.homesick/repos/homeshick/homeshick.sh
     
-    # homeshick cd dotfiles
+    
+    ### Homeshick - Setup git config
     cd $HOME/.homesick/repos/dotfiles
     git config --global user.email "$git_email"
     git config --global user.name "$git_user"
@@ -218,7 +212,7 @@ do
     
     
     1.4)
-    # Homeshick (HTTPS batch clone dotfiles to new machine)
+    ### Homeshick (HTTPS batch clone dotfiles to new machine)
     # "--batch" bypasses user input questions like yes/no
     # Cloning from the HTTPS link doesn't require SSH keys to be configured
     homeshick --batch clone https://github.com/"$git_user"/"$git_repo".git
@@ -229,13 +223,13 @@ do
     
     
     1.7)
-    # Repositories
-    # Add Canonical_Partners
+    ### Repositories - Add Canonical_Partners
     sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
     ;;
     
+    
     1.8)
-    # Disable Error Reporting (Remove Apport)
+    ### Disable Error Reporting - Remove Apport
     if grep "enabled=0" /etc/default/apport
     then
       echo "Apport Error reporting already disabled"
@@ -248,8 +242,7 @@ do
     
     
     1.9)
-    # Edit Grub (Add nomodeset)
-    # Workaround for nvidia graphics drivers causing the bootup to fail
+    ### Edit Grub - Add nomodeset (nvidia graphics drivers causing the bootup to fail)
     sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash nomodeset"/g' /etc/default/grub
     sudo update-grub
     echo "DON'T FORGET TO REBOOT"
@@ -257,8 +250,7 @@ do
     
     
     2.0)
-        # Windows 10 Ubuntu Apps (non-gui)
-    # Installs a list of essential linux apps
+    ### Ubuntu Essential Apps Install - Windows 10 non-gui
     for line in $(cat $HOME/bin/win_ubuntu_apps.txt); do
       sudo apt -y install $line
       if [[ ! $? -eq 0 ]]; then
@@ -269,8 +261,7 @@ do
     
     
     3.0)
-    # Essential Apps
-    # Installs a list of essential linux apps
+    ### Ubuntu Essential Apps Install - installs from list
     for line in $(cat $HOME/bin/essential_apps.txt); do
       sudo apt -y install $line
       if [[ ! $? -eq 0 ]]; then
@@ -281,7 +272,7 @@ do
     
     
     4)
-    # Media
+    ### Media Apps Install
     sudo DEBIAN_FRONTEND=noninteractive apt -y install libdvd-pkg
     sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure libdvd-pkg
     $INSTALL \
@@ -289,12 +280,11 @@ do
     libavcodec-extra \
     vlc \
     gimp gimp-data gimp-plugin-registry gimp-data-extras \
-    shutter
     ;;
     
     
     5)
-    # Restricted Extras
+    ### Restricted Extras Install
     echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
     $INSTALL ttf-mscorefonts-installer
     echo ttf-mscorefonts-installer msttcorefonts/present-mscorefonts-eula note | sudo debconf-set-selections
@@ -303,8 +293,7 @@ do
     
     
     6)
-    # Teamviewer
-    # Screen Sharing & Remote Login
+    ### Teamviewer Install
     wget -q -O - https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo apt-key add -
     sudo sh -c 'echo "deb http://linux.teamviewer.com/deb stable main" >> /etc/apt/sources.list.d/teamviewer.list'
     sudo sh -c 'echo "deb http://linux.teamviewer.com/deb preview main" >> /etc/apt/sources.list.d/teamviewer.list'
@@ -314,75 +303,71 @@ do
     
     
     7)
-    # Skype
-    # Download then install skype for linux directly from microsoft
-    #sudo snap install skype --classic
+    ### Skype Install - Non repo direct download from microsoft
     wget https://repo.skype.com/latest/skypeforlinux-64.deb
     sudo dpkg -i skypeforlinux-64.deb
     sudo apt install -f -y
     rm -rf skypeforlinux-64.deb
+    ### Snap Install
+    #sudo snap install skype --classic
     ;;
     
     
     8.0)
-    # Docky
-    # Desktop app launcher
+    ### Docky Install - App Launcher
     sudo apt -y install docky
     ;;
 
 
     8.1)
-    # Plank
-    # Desktop app launcher - don't forget to add autostart
-    # Either manually add or create config file ".config/autostart/plank.desktop"
+    ### Plank Install - Desktop Launcher
     sudo apt -y install plank
+    #Autostart Config - Create ".config/autostart/plank.desktop"
     ;;
     
     
     9)
-    # Chrome
+    ### Chrome Install - Browser
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
     #echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
     sudo apt update
-    $INSTALL google-chrome-stable
+    sudo apt install -y google-chrome-stable
     ;;
     
     
     10)
-    # Thunderbird
-    $INSTALL thunderbird
+    ### Thunderbird Install
+    sudo apt install -y thunderbird
     ;;
     
     
     11)
-    # Plank (Desktop app launcher)
+    ### Plank Install - App Launcher
     sudo apt -y install plank
     ;;
     
     
     12)
-    # lm-sensors
-    $INSTALL lm-sensors hddtemp
+    ### lm-sensors Install - Tempature Sensor
+    sudo apt install -y lm-sensors hddtemp
     sudo sensors-detect
     sensors
     ;;
     
     
     13)
-    # NA
+    ### NA
     ;;
     
     
     14)
-    # Wallpapers
-    # Ubuntu Collection
-    $INSTALL \
+    ### Wallpapers Download - Ubuntu Collection
+    sudo apt install -y \
     ubuntu-wallpapers-* \
     edgy-wallpapers \
     feisty-wallpapers \
     gutsy-wallpapers
-    #
     # Dropbox Collection need to fix i think
     #curl "https://www.dropbox.com/sh/yqoksuzhflnyems/AACgHGrBzgATmExaJsB8zR5ma?dl=1" -O -J -L && \
     #sudo unzip Backgrounds_Dropbox.zip -d /usr/share/xfce4/backdrops/
@@ -407,31 +392,26 @@ do
     
     
     16)
-    # Virtualbox (Guest)
-    # Insert guest additions before installing
-    #sudo apt update
-    #sudo apt -y upgrade
-    #sudo apt -y dist-upgrade
-    $INSTALL dkms build-essential
+    ### Virtualbox Guest Install - Insert image before installing
+    sudo apt install -y dkms build-essential
     sudo mount -r /dev/sr0 /media
     sudo sh /media/VBoxLinuxAdditions.run
     sudo adduser $USER vboxsf
-    sudo reboot now
+    #sudo reboot now
     ;;
     
     
     17)
-    # Virtualbox (Host)
-    #Add repo key
+    ### Virtualbox Host Install - VM Software
+    #Add Repo Key
     wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
     wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
-    #Add virtualbox repo
+    #Add VBox Repo
     sudo add-apt-repository "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib"
     #sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" >> /etc/apt/sources.list.d/virtualbox.list'
     sudo apt update
-    $INSTALL dkms gcc make linux-headers-$(uname -r)
-    #sudo apt update
-    $INSTALL virtualbox-6.*
+    sudo apt install -y dkms gcc make linux-headers-$(uname -r)
+    sudo apt install -y virtualbox-7.*
     sudo usermod -a -G vboxusers $USER
     ;;
     
@@ -523,17 +503,15 @@ do
     ;;
     
     26)
-    # Atom
-    # Text Editor
+    ### Atom Install - Text Editor
     curl -sL https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
     sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
     sudo apt update
-    $INSTALL atom
+    sudo apt install -y atom
     ;;
     
     27)
-    # Wireshark
-    # Network Monitor
+    ### Wireshark Install - Network Monitor
     echo wireshark-common wireshark-common/install-setuid boolean true | sudo debconf-set-selections
     sudo DEBIAN_FRONTEND=noninteractive apt -y install wireshark
     sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure wireshark-common
@@ -541,50 +519,34 @@ do
     ;;
     
     28)
-    # ClamAV (Install)
-    # Virus Protection
-    # Troubleshooting, first stop deamon then rerun update
-    # sudo systemctl stop clamav-freshclam.service
-    # sudo freshclam
-    # OR
-    # sudo pkill -15 -x freshclam
-    # sudo freshclam
-    # OR
-    # sudo /etc/init.d/clamav-freshclam stop
-    # sudo freshclam
-    # sudo /etc/init.d/clamav-freshclam start
-    $INSTALL clamav clamav-daemon clamtk
+    ### ClamAV Install - Virus Protection
+    sudo apt install -y clamav clamav-daemon clamtk
     sudo freshclam
     sudo /etc/init.d/clamav-daemon start
     ;;
     
     
     28.1)
-    # ClamAV (Uninstall)
+    ### ClamAV Uninstall
     sudo apt-get -y remove --purge clamav*
     ;;
     
     
     29)
-    # Youtube-dl
-    # Web downloader
-    # Initially, used the alternative install
-    # Now changed to pip install method so it's easier to update
-    # Alternative Install
+    ### Youtube-dl Install - Web Downloader
     # sudo curl -L https://yt-dl.org/latest/youtube-dl -o /usr/local/bin/youtube-dl
     # sudo chmod a+rx /usr/local/bin/youtube-dl
-    # Pip Install
-    $INSTALL curl
-    $INSTALL ffmpeg
-    $INSTALL python3-pip
-    # sudo pip install youtube-dl
+    # Pip Install - youtube-dl
+    sudo apt install -y \
+    curl \
+    ffmpeg \
+    python3-pip
     sudo -H pip3 install --upgrade youtube-dl
     ;;
     
     30)
-    # Most
-    # Manpage Highlighting
-    $INSTALL most
+    ### Most Install - Manpage Highlighting
+    sudo apt install -y most
     if grep "export PAGER='most'" ~/.bashrc
     then
       echo "Most already added to ~/.bashrc"
@@ -596,8 +558,8 @@ do
     ;;
     
     31)
-    # Ubuntu 18.04 (Custom Tweaks)
-    $INSTALL \
+    ### Ubuntu 18.04 - Custom Tweaks
+    sudo apt install \
     gnome-tweak-tool \
     gnome-shell-extensions \
     dconf-editor;
@@ -605,73 +567,67 @@ do
     ;;
     
     32)
-    # Geany
-    # IDE
-    $INSTALL geany geany-plugin-addons geany-plugin-treebrowser
+    ### Geany Install - IDE
+    sudo apt install -y geany geany-plugin-addons geany-plugin-treebrowser
     ;;
     
     33)
-    # Brackets
-    # IDE
+    ### Brackets Install - IDE
     sudo add-apt-repository ppa:webupd8team/brackets -y
     sudo apt update
-    $INSTALL brackets
+    sudo apt install -y brackets
     ;;
     
     34)
-    # Bluefish
-    # IDE
-    $INSTALL bluefish bluefish-plugins
+    ### Bluefish Install - IDE
+    sudo apt install -y bluefish bluefish-plugins
     ;;
     
     35)
-    # Kali 2018 (Custom Tweaks)
-    # Auto Login GNOME Desktop
-    sed -i 's/#AutomaticLoginEnable = true/AutomaticLoginEnable = true/g' /etc/gdm3/daemon.conf
-    sed -i 's/#AutomaticLogin = root/AutomaticLogin = root/g' /etc/gdm3/daemon.conf
+    # Kali - Gnome Autologin
+    #sed -i 's/#AutomaticLoginEnable = true/AutomaticLoginEnable = true/g' /etc/gdm3/daemon.conf
+    #sed -i 's/#AutomaticLogin = root/AutomaticLogin = root/g' /etc/gdm3/daemon.conf
     ;;
     
     36)
-    # XFCE4
-    # xfce terminal, has more functionality than basic lubuntu
-    # Enable "Dropdown Terminal" or make a shortcut for it
-    $INSTALL xfce4-terminal
+    # Xfce Terminal Install - Enable dropdown terminal shortcut
+    sudo apt install xfce4-terminal
     ;;
     
     37)
-    # Slack (Team Collaboration)
-    sudo snap install slack --classic
+    ### Brave Install - Browser
+    sudo apt update && sudo apt install -y apt-transport-https curl
+    sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+    sudo apt update
+    sudo apt install -y brave-browser
     ;;
     
     38)
-    # Rootcheck
-    # Add to main script
-    aptget='sudo apt-get'
-    if [ `whoami` = 'root' ]; then
-      aptget='apt-get'
-    fi
+    ### ddgr Install - DuckDuckGo Command Line Search
+    wget https://github.com/jarun/ddgr/archive/refs/tags/v2.2.zip
+	unzip v2.2.zip
+	cd ddgr-2.2/
+	sudo make install
     ;;
     
     39)
-    # Vtop
-    # System Monitor
-    # Bit heavy for a VM depending which base distro and dependencies
+    ### Vtop Install - System Monitor (To heavy for vm?)
     sudo npm -y install -g vtop
     ;;
     
     40)
-    # Libre Office 6.0
-    # Office Suite
+    ### Libre Office Install - Office Suite
     sudo add-apt-repository ppa:libreoffice/ppa -y
     sudo apt update
-    $INSTALL libreoffice
+    sudo apt install libreoffice
     ;;
 
     41)
-    # Kali (XFCE) Enable Autologin
-    # uncomment and add root to autologin settings
+    ### Kali 2024.2 - Enable XFCE Autologin
+    #sed -i 's/#autologin-user=/autologin-user=$USER/g' /etc/lightdm/lightdm.conf
+    #sed -i 's/#autologin-user-timeout=0/autologin-user-timeout=0/g' /etc/lightdm/lightdm.conf
     sed -i 's/#autologin-user=/autologin-user=root/g' /etc/lightdm/lightdm.conf
-    # change syntax in autologin config
     sed -i 's/!= root quiet_success/!= anything quiet_success/g' /etc/pam.d/lightdm-autologin
     ;;
     

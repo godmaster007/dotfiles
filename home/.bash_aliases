@@ -217,6 +217,40 @@ YDW () {
   --metadata-from-title '%(artist)s - %(title)s' \
   "$1"
   cd ~
+<<<<<<< HEAD
+=======
+}
+
+
+## Dropbox-Uploader ##
+# Command-Line functionality
+# Source (https://github.com/andreafabrizi/Dropbox-Uploader)
+# EX: Upload aliases to dropbox root (DBU upload ~/.bash_aliases /)
+alias DBU='./Dropbox-Uploader/dropbox_uploader.sh'
+
+
+## Password Generator ##
+function randpassw(){
+  if [ -z $1 ]; then
+    MAXSIZE=10
+  else
+    MAXSIZE=$1
+  fi
+  array1=(
+  q w e r t y u i o p a s d f g h j k l z x c v b n m Q W E R T Y U I O P A S D
+  F G H J K L Z X C V B N M 1 2 3 4 5 6 7 8 9 0
+  \! \@ \$ \% \^ \& \* \! \@ \$ \% \^ \& \* \@ \$ \% \^ \& \*
+  )
+  MODNUM=${#array1[*]}
+  pwd_len=0
+  while [ $pwd_len -lt $MAXSIZE ]
+  do
+    index=$(($RANDOM%$MODNUM))
+    echo -n "${array1[$index]}"
+    ((pwd_len++))
+  done
+  echo
+>>>>>>> 3df456b3d3a43f12c5f1e93bbccefa19bcd1a623
 }
 
 
