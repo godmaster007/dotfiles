@@ -29,9 +29,9 @@
 ## Set command variables ##
 # Depending on root admin, this assumes debian
 # If derivate, replace with yum, pacman etc.
-apt='sudo apt'
-if [ `whoami` = 'root' ]; then
-    apt='apt'
+apt="sudo apt"
+if [ "$(whoami)" = "root" ]; then
+    apt="apt"
 fi
 
 
