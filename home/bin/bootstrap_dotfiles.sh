@@ -40,24 +40,23 @@ $apt update
 $apt install -y curl vim nano git xclip
 
 
-## SSH Config ##
-# Generate new keys
-# Use passphrase or bypass, remove <yes "" |> to set phrase
+##SSH Config
+#Generate new keys, remove (yes "" |) to set phrase
 if [ -f ~/.ssh/id_rsa.pub ]; then
     echo "Public SSHkey already created"
 else
     yes "" | ssh-keygen -t rsa -b 4096
 fi
-# Start SSH-Agent in the background
+#Start SSH-Agent
 eval $(ssh-agent -s)
-# Add private SSH-Key to SSH-Agent
-# (-k) stores passphrase to keychain
-# Example (ssh-add -k ~/.ssh/id_rsa)
+#Add private SSH-Key
 ssh-add ~/.ssh/id_rsa
+#Add private SSH-Key with passphrase with -k flag
+#ssh-add -k ~/.ssh/id_rsa
 
 
-## Homeshick Config ##
-# Github and SSH config
+##Homeshick Config
+#Github and SSH config
 echo "Hello, "$USER".  This script will configure your Github and SSH config. \n
 Leave the responses blank if you would like to use default settings."
 # Username
