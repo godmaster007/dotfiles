@@ -1,4 +1,4 @@
-## Essential Apps ##
+## Essential Apps
 curl
 wget
 git
@@ -15,7 +15,7 @@ psensor
 toilet
 
 
-## Disabled ##
+## Disabled
 #gedit gedit-plugins
 #python-pip
 #npm
