@@ -149,51 +149,68 @@ alias ethtool='ethtool eth1'
 #youtube-dl was forked into yt-dlp
 #Download as MP3 into the shared folder of the guest vm/host
 YD () {
-  cd /media/sf_Downloads/yt_dlp
+  # Define the directory where you want to store your downloads and archive file
+  local download_dir="/media/sf_Downloads/yt_dlp"
+
   yt-dlp \
   --cookies-from-browser firefox \
-  --download-archive MP3_downloaded.txt \
+  --download-archive "${download_dir}/MP3_downloaded.txt" \
+  --paths "$download_dir" \
   --no-post-overwrites \
-  --audio-quality 320K \
-  --add-metadata -ciwx \
-  --audio-format mp3 -o '%(title)s.%(ext)s' \
+  -f 'bestaudio' \
+  -x --audio-format mp3 --audio-quality 0 \
+  --add-metadata --embed-thumbnail \
   --metadata-from-title '%(artist)s - %(title)s' \
-  --embed-thumbnail \
+  -o '%(title)s.%(ext)s' \
+  -i \
   "$1"
-  cd ~
 }
 
-#Download Testing
-TEST='https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-egUfcX8vzsyV4z9FlaAUOn'
-YOUTUBE="cd $HOME/YOUTUBE"
+# YD () {
+#   cd /media/sf_Downloads/yt_dlp
+#   yt-dlp \
+#   --cookies-from-browser firefox \
+#   --download-archive MP3_downloaded.txt \
+#   --no-post-overwrites \
+#   --audio-quality 320K \
+#   --add-metadata -ciwx \
+#   --audio-format mp3 -o '%(title)s.%(ext)s' \
+#   --metadata-from-title '%(artist)s - %(title)s' \
+#   --embed-thumbnail \
+#   "$1"
+#   cd ~
+# }
 
-YDT () {
-  $YOUTUBE
-  yt-dlp \
-  --download-archive TEST_downloaded.txt \
-  --no-post-overwrites \
-  --audio-quality 320K \
-  --add-metadata -ciwx \
-  --audio-format "mp3" -o '%(title)s.%(ext)s' \
-  --metadata-from-title '%(artist)s - %(title)s' \
-  --embed-thumbnail \
-  $TEST;
-  cd ~
-}
+# #Download Testing
+# TEST='https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-egUfcX8vzsyV4z9FlaAUOn'
+# YOUTUBE="cd $HOME/YOUTUBE"
+# YDT () {
+#   $YOUTUBE
+#   yt-dlp \
+#   --download-archive TEST_downloaded.txt \
+#   --no-post-overwrites \
+#   --audio-quality 320K \
+#   --add-metadata -ciwx \
+#   --audio-format "mp3" -o '%(title)s.%(ext)s' \
+#   --metadata-from-title '%(artist)s - %(title)s' \
+#   --embed-thumbnail \
+#   $TEST;
+#   cd ~
+# }
 
-#Download playlist as WAV files
-YDW () {
-  cd $HOME/YOUTUBE/WAVE
-  yt-dlp \
-  --download-archive WAVE_downloaded.txt \
-  --no-post-overwrites \
-  --audio-quality 320K \
-  --add-metadata -ciwx \
-  --audio-format wav -o '%(title)s.%(ext)s' \
-  --metadata-from-title '%(artist)s - %(title)s' \
-  "$1"
-  cd ~
-}
+# #Download playlist as WAV files
+# YDW () {
+#   cd $HOME/YOUTUBE/WAVE
+#   yt-dlp \
+#   --download-archive WAVE_downloaded.txt \
+#   --no-post-overwrites \
+#   --audio-quality 320K \
+#   --add-metadata -ciwx \
+#   --audio-format wav -o '%(title)s.%(ext)s' \
+#   --metadata-from-title '%(artist)s - %(title)s' \
+#   "$1"
+#   cd ~
+# }
 
 
 
