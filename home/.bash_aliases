@@ -1,67 +1,17 @@
-##TESTFROMCASEY#
 
-#### TESTING ####
-# Fix Media Access
-alias fmedia='sudo chown -R dopeman:deluge ~/Media/wd12/ && sudo chmod -R 775 ~/Media/wd12/'
-
-## TESTING ##
-
-#Download Youtube playlist "YD1"
-alias DY='. $HOME/bin/youtube_dl_test.sh'
-
-# Toggle display power - Ubuntu Server Fix
-alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
-
-# Copy file contents to clipboard
-CLIP () {
-  xclip -sel clip < "$1"
-}
-
-# Display Core Temp
-alias TEMP='sensors -f'
+### Bootstrap - Download script ###
+alias DLBOOT='sudo apt -y install curl && curl -sLo bootstrap.sh git.io/fhdhf && chmod +x bootstrap.sh'
 
 
-## Server Firewall ##
-# Check status of sshd
-alias f2b='sudo fail2ban-client status sshd | less'
-
-
-## Add User ##
-# useradd -m username
-# passwd username
-# usermod -a -G username
-# chsh -s /bin/bash username
-# Details: -m creates home directory, passwd sets password
-# -a sets user group to sudo, -G adds user to sudo group
-# chsh changes login shell for user
-
-# NewUser () {
-#   echo "Hello, "$USER".  This script will add a new user."
-#   # Username
-#   echo -n "Enter your new Username and press [ENTER]: "
-#   read new_user
-#   if [ `whoami` = 'root' ]; then
-#     apt='apt'
-# fi
-#   useradd -m $new_user
-#   passwd $new_user
-#   usermod -a -G sudo $new_user
-#   chsh -s /bin/bash $new_user
-# }
-
-
-## Bootstrap ##
-# Display alias syntax
+### Bash Aliases ###
+# View alias syntax
 alias VB='clear; clear; c ~/.bash_aliases'
 # Reload shell settings
 alias SOURCE='. ~/.bashrc'
-# Download bootstrap.sh
-alias DLBOOT='sudo apt -y install curl && curl -sLo bootstrap.sh git.io/fhdhf && chmod +x bootstrap.sh'
-# Show most used commands
-#history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 
 
-## Git Commands with Homeshick ##
+
+### Git Commands with Homeshick ###
 # Check status
 alias CHECK='homeshick check ; homeshick cd dotfiles && git status && cd ~'
 # Download current version
@@ -81,7 +31,28 @@ PUSH () {
 }
 
 
-## System Management ##
+
+### Plex Media Server ###
+#Fix media access
+alias fmedia='sudo chown -R dopeman:deluge ~/Media/wd12/ && sudo chmod -R 775 ~/Media/wd12/'
+#Manually turn screen off and on - Headless Ubuntu Server
+alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
+#Display Core Temp
+alias TEMP='sensors -f'
+#Server Firewall - check status of sshd
+alias f2b='sudo fail2ban-client status sshd | less'
+
+
+
+### Clipboard Managment###
+#Copy file contents to clipboard
+CLIP () {
+  xclip -sel clip < "$1"
+}
+
+
+
+### System Management ###
 # System Load Graphic
 alias sysload="tload -s 10"
 # Memory Stats
@@ -117,8 +88,8 @@ kp () {
 
 
 
-## System Updates ##
-# Update & Clean plus reboot or shutdown
+### System Commands ###
+#Update & Clean
 alias UC='\
 sudo apt update ; \
 sudo apt upgrade -y ; \
@@ -126,15 +97,14 @@ sudo apt dist-upgrade -y ; \
 sudo apt autoremove -y ; \
 sudo apt autoclean -y ; \
 sudo apt clean -y'
+#Reboot & Shutdown
 alias UCR='UC ; reboot'
 alias UCS='UC ; shutdown'
-
 # Powerswitches
 alias reboot='sudo shutdown -r now'
 alias poweroff='sudo /sbin/poweroff'
 alias halt='sudo /sbin/halt'
 alias shutdown='sudo /sbin/shutdown -h now'
-
 # View Installed Packages
 showpkg () {
   apt-cache pkgnames | grep -i "$1" | sort | less
@@ -150,7 +120,8 @@ alias SSHKEY='yes "" | ssh-keygen -t rsa -b 4096'
 # SSH Keys (Copy) - IE (ssh-copy-id -p 2022 root@76.14.134.182)
 
 
-## Networking ##
+
+### Networking ###
 # Nmap - Network Mapper & Port Scanner
 alias NMAP='nmap --iflist'
 # IP Tools (https://www.poftut.com/linux-ss-command-tutorial-with-examples)
@@ -173,8 +144,26 @@ alias tcpdump='tcpdump -i eth1'
 alias ethtool='ethtool eth1'
 
 
-## Youtube-dl aka "yt-dlp"##
 
+### Youtube Downloader ###
+#youtube-dl was forked into yt-dlp
+#Download as MP3 into the shared folder of the guest vm/host
+YD () {
+  cd /media/sf_Downloads/yt_dlp
+  yt-dlp \
+  --cookies-from-browser firefox \
+  --download-archive MP3_downloaded.txt \
+  --no-post-overwrites \
+  --audio-quality 320K \
+  --add-metadata -ciwx \
+  --audio-format mp3 -o '%(title)s.%(ext)s' \
+  --metadata-from-title '%(artist)s - %(title)s' \
+  --embed-thumbnail \
+  "$1"
+  cd ~
+}
+
+#Download Testing
 TEST='https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-egUfcX8vzsyV4z9FlaAUOn'
 YOUTUBE="cd $HOME/YOUTUBE"
 
@@ -192,22 +181,7 @@ YDT () {
   cd ~
 }
 
-## Download as MP3
-YD () {
-  cd $HOME/YOUTUBE/MP3
-  yt-dlp \
-  --download-archive MP3_downloaded.txt \
-  --no-post-overwrites \
-  --audio-quality 320K \
-  --add-metadata -ciwx \
-  --audio-format mp3 -o '%(title)s.%(ext)s' \
-  --metadata-from-title '%(artist)s - %(title)s' \
-  --embed-thumbnail \
-  "$1"
-  cd ~
-}
-
-## Download playlist as WAV files
+#Download playlist as WAV files
 YDW () {
   cd $HOME/YOUTUBE/WAVE
   yt-dlp \
@@ -222,15 +196,17 @@ YDW () {
 }
 
 
-## Dropbox-Uploader ##
+
+### Dropbox-Uploader ###
 # Command-Line functionality
 # Source (https://github.com/andreafabrizi/Dropbox-Uploader)
 # EX: Upload aliases to dropbox root (DBU upload ~/.bash_aliases /)
 alias DBU='./Dropbox-Uploader/dropbox_uploader.sh'
 
 
+
 ## Password Generator ##
-function randpassw(){
+function randpassw() {
   if [ -z $1 ]; then
     MAXSIZE=10
   else
@@ -253,39 +229,38 @@ function randpassw(){
 }
 
 
-## File Management ##
-# Drive Details
-alias DISK!="sudo lshw -C disk;uname -a"
-# Format with zeros, change 0 to 1 to shred first
-# EX: shred -vzn 0 /dev/sda
+### File Management ###
+#Drive Details
+alias DISK="sudo lshw -C disk;uname -a"
+#Format with zeros - example: "shred -vzn 0 /dev/sda"
 # Tree view
-function tree(){
+function tree() {
   pwd
   ls -R | grep ":$" |   \
   sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 }
-# Directory Contents
+#Directory Contents
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
-# View Hidden Files
+#View Hidden Files
 alias l.='ls -d .* --color=auto'
 alias lsh="ls -ld .??*"
-# Disk Usage
+#Disk Usage
 alias df="df -H"
 alias du="du -ch"
 alias du1='du -d 1'
-# RSYNC - Copy with Progress & Resume
+#Copy files with progress and resume
 alias rsyncp="rsync --progress -ravz"
-# Move files and folders recursive, preserve perm and owner
+#Move files and folders recursive, preserve perm and owner
 alias moveff="cd /source/directory; tar cf - . | tar xf - -C /destination/directory"
-# WGET - Continous Web Downloader
+#Web downloader with continous flag
 alias wget="wget -c"
 
 
-## Settings ##
+### Settings ###
 # Short Cuts
 alias h="clear; c ~/.bash_history"
 alias j="jobs -l"
@@ -304,17 +279,17 @@ alias cp='cp -i'
 alias ln='ln -i'
 alias rm='rm -i'
 
-# Python Pigments - Syntax Highlighting
-alias c='pygmentize -g'
 
-# Highlighting with Rows
+
+### Syntax Highlighting ###
+#Python Pigments
+alias c='pygmentize -g'
+#Highlight with Rows
 alias cc='pygmentize -g -O style=colorful,linenos=1'
 
-# Plex Server - Manually turn screen off and on
-alias TF="sudo vbetool dpms off && read -s -n 1 && sudo vbetool dpms on"
 
 
-## File Extractor ##
+### File Extractor ###
 function extract {
  if [ -z "$1" ]; then
     # display usage if no parameters given
