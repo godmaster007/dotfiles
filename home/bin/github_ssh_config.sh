@@ -10,7 +10,8 @@ if [ -z "${GITHUB_TOKEN:-}" ]; then
 fi
 
 # Email used for GitHub key label (change if needed)
-GITHUB_EMAIL="your_email@example.com"
+# GITHUB_EMAIL="your_email@example.com"
+GITHUB_EMAIL="42882580+godmaster007@users.noreply.github.com"
 
 # Generate SSH key if missing
 if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
