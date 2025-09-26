@@ -148,55 +148,54 @@ alias ethtool='ethtool eth1'
 ### Youtube Downloader ###
 #youtube-dl was forked into yt-dlp
 #Download as MP3 into the shared folder of the guest vm/host
-YD () {
-  # Define the directory where you want to store your downloads and archive file
-  local download_dir="/media/sf_Downloads/yt_dlp"
-
-  yt-dlp \
-  --cookies-from-browser firefox \
-  --download-archive "${download_dir}/MP3_downloaded.txt" \
-  --paths "$download_dir" \
-  --no-post-overwrites \
-  -f 'bestaudio' \
-  -x --audio-format mp3 --audio-quality 0 \
-  --add-metadata --embed-thumbnail \
-  --metadata-from-title '%(artist)s - %(title)s' \
-  -o '%(title)s.%(ext)s' \
-  -i \
-  "$1"
-}
-
 # YD () {
-#   cd /media/sf_Downloads/yt_dlp
+#   # Define the directory where you want to store your downloads and archive file
+#   local download_dir="/media/sf_Downloads/yt_dlp"
+
 #   yt-dlp \
 #   --cookies-from-browser firefox \
-#   --download-archive MP3_downloaded.txt \
+#   --download-archive "${download_dir}/MP3_downloaded.txt" \
+#   --paths "$download_dir" \
 #   --no-post-overwrites \
-#   --audio-quality 320K \
-#   --add-metadata -ciwx \
-#   --audio-format mp3 -o '%(title)s.%(ext)s' \
+#   -f 'bestaudio' \
+#   -x --audio-format mp3 --audio-quality 0 \
+#   --add-metadata --embed-thumbnail \
 #   --metadata-from-title '%(artist)s - %(title)s' \
-#   --embed-thumbnail \
+#   -o '%(title)s.%(ext)s' \
+#   -i \
 #   "$1"
-#   cd ~
 # }
 
-# #Download Testing
-# TEST='https://www.youtube.com/playlist?list=PLgJ5ZeA-kk-egUfcX8vzsyV4z9FlaAUOn'
-# YOUTUBE="cd $HOME/YOUTUBE"
-# YDT () {
-#   $YOUTUBE
-#   yt-dlp \
-#   --download-archive TEST_downloaded.txt \
-#   --no-post-overwrites \
-#   --audio-quality 320K \
-#   --add-metadata -ciwx \
-#   --audio-format "mp3" -o '%(title)s.%(ext)s' \
-#   --metadata-from-title '%(artist)s - %(title)s' \
-#   --embed-thumbnail \
-#   $TEST;
-#   cd ~
-# }
+
+YD () {
+  local download_dir="/media/sf_Downloads/yt_dlp"
+
+  # Check if yt-dlp is installed
+  command -v yt-dlp >/dev/null 2>&1 || {
+    echo >&2 "yt-dlp is not installed. Aborting."
+    return 1
+  }
+
+  # Create download directory if it doesn't exist
+  mkdir -p "$download_dir"
+
+  yt-dlp \
+    --cookies-from-browser firefox \
+    --download-archive "${download_dir}/MP3_downloaded.txt" \
+    --paths "$download_dir" \
+    --no-post-overwrites \
+    -f 'bestaudio' \
+    -x --audio-format mp3 --audio-quality 0 \
+    --add-metadata --embed-thumbnail \
+    --metadata-from-title '%(artist)s - %(title)s' \
+    --restrict-filenames \                           # Auto-rename for safe filenames
+    --progress \                                      # Force progress bar
+    -o '%(title)s.%(ext)s' \
+    -i \
+    "$@"
+}
+
+
 
 # #Download playlist as WAV files
 # YDW () {
