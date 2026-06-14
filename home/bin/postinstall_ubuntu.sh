@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-### DEBUG
+## DEBUG
 #set -x
 #set -e
 set -v
